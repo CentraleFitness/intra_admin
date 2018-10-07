@@ -1,0 +1,13 @@
+.wrapper {
+    background: rgb(255, 88, 137); /* For browsers that do not support gradients */
+    background-image: -webkit-linear-gradient(left bottom, rgb(255, 88, 137), rgb(0, 0, 0), rgb(255, 189, 104)); /* For Safari 5.1 to 6.0 */
+    background-image: -o-linear-gradient(left bottom, rgb(255, 88, 137), rgb(0, 0, 0), rgb(255, 189, 104)); /* For Opera 11.1 to 12.0 */
+    background-image: -moz-linear-gradient(left bottom, rgb(255, 88, 137), rgb(0, 0, 0), rgb(255, 189, 104)); /* For Firefox 3.6 to 15 */
+    background-image: linear-gradient(to left bottom, rgb(255, 88, 137), rgb(0, 0, 0), rgb(255, 189, 104)); /* Standard syntax */
+}
+
+.logo {
+    height: 200px;
+    width:200px;
+}
+

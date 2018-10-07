@@ -1,0 +1,60 @@
+.menu {
+    position: fixed;
+    left: 0;
+    margin-left: 5px;
+    width: 165px;
+}
+
+/*
+
+.nav-pills>li>a {
+    color: #FFBD68 !important;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    background-color: #FFBD68 !important;
+    color: #FF5889 !important;
+}
+
+.panel-primary>.panel-heading {
+    background-color: #FFBD68 !important;
+    background-image: none !important;
+    border-color: #FF5889 !important;
+    color: #FF5889 !important;
+}
+
+.panel-primary {
+    border-color: #FF5889 !important;
+}
+
+*/
+
+.nav-pills>li>a {
+    color: #000000 !important;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+
+    background: rgb(255, 88, 137); /* For browsers that do not support gradients */
+    background-image: -webkit-linear-gradient(left bottom, rgb(255, 88, 137), rgb(255, 189, 104)); /* For Safari 5.1 to 6.0 */
+    background-image: -o-linear-gradient(left bottom, rgb(255, 88, 137), rgb(255, 189, 104)); /* For Opera 11.1 to 12.0 */
+    background-image: -moz-linear-gradient(left bottom, rgb(255, 88, 137), rgb(255, 189, 104)); /* For Firefox 3.6 to 15 */
+    background-image: linear-gradient(to left bottom, rgb(255, 88, 137), rgb(255, 189, 104)); /* Standard syntax */
+
+    color: #FFFFFF !important;
+}
+
+.panel-primary>.panel-heading {
+    background-color: #C8C8C8 !important;
+    background-image: none !important;
+    border-color: #C8C8C8 !important;
+    color: #FFFFFF !important;
+}
+
+.panel-primary {
+    border-color: #C8C8C8 !important;
+}
+
+.nav-tabs>li>a {
+    color: #000000 !important;
+}
