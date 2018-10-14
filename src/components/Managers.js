@@ -234,11 +234,14 @@ class Managers extends React.Component {
         );
     }
 
-    setValidation(item) {
+    //TODO GERER LES IS_REFUSED
+
+    setValidation(item, is_validated) {
         let params = {};
 
         params[Fields.TOKEN] = localStorage.getItem("token");
         params[Fields.FITNESS_CENTER_MANAGER_ID] = item._id;
+        params[Fields.IS_VALIDATED] = is_validated;
 
         let me = this;
 
@@ -251,6 +254,7 @@ class Managers extends React.Component {
                         if (me !== undefined) {
                             me.props.setValidateManager({
                                 _id: item._id,
+                                is_validated: is_validated,
                                 time: new Date().getTime(),
                                 validator_admin_id: response.data.administrator_id,
                                 validator_admin_name: response.data.administrator_name
@@ -326,11 +330,32 @@ class Managers extends React.Component {
         );
     }
 
+    getRefuseOverlay(item) {
+        return (
+            <Tooltip id={"tooltip_refuse"}>
+                {Texts.REFUSER_LE_COMPTE.text_fr}
+            </Tooltip>
+        );
+    }
+
     getValidatedOverlay(item) {
         return (
             <Tooltip id={"tooltip_validated"}>
                 {
                     Texts.LE_COMPTE_A_ETE_VALIDE_LE.text_fr + " " +
+                    Dates.format(item.validation_date) + " " +
+                    Texts.PAR.text_fr + " " +
+                    item.validator_admin_name
+                }
+            </Tooltip>
+        );
+    }
+
+    getRefusedOverlay(item) {
+        return (
+            <Tooltip id={"tooltip_refused"}>
+                {
+                    Texts.LE_COMPTE_A_ETE_REFUSE_LE.text_fr + " " +
                     Dates.format(item.validation_date) + " " +
                     Texts.PAR.text_fr + " " +
                     item.validator_admin_name
@@ -366,14 +391,29 @@ class Managers extends React.Component {
     }
 
     validateClick(item) {
-        if (item.is_validated === false) {
+        if (item.is_validated === false && item.is_refused === false) {
             this.props.displayManagerUpdateConfirm({
-                update_confirm_title: "Valider ce compte ?",
-                update_confirm_text: "Voulez vous vraiment valider le compte de cet utilisateur ?",
+                update_confirm_title: Texts.VALIDER_CE_COMPTE.text_fr + " ?",
+                update_confirm_text: Texts.ETES_VOUS_SUR_DE_VOULOIR_VALIDER_CE_COMPTE.text_fr + " ?",
                 update_confirm_is_validation: true,
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
-                update_confirm_is_active: item.is_active
+                update_confirm_is_active: item.is_active,
+                update_confirm_is_validated: true
+            });
+        }
+    }
+
+    refuseClick(item) {
+        if (item.is_validated === false && item.is_refused === false) {
+            this.props.displayManagerUpdateConfirm({
+                update_confirm_title: Texts.REFUSER_CE_COMPTE.text_fr + " ?",
+                update_confirm_text: Texts.ETES_VOUS_SUR_DE_VOULOIR_REFUSER_CE_COMPTE.text_fr + " ?",
+                update_confirm_is_validation: true,
+                update_confirm_id: item._id,
+                update_confirm_name: item.first_name + " " + item.last_name,
+                update_confirm_is_active: item.is_active,
+                update_confirm_is_validated: false
             });
         }
     }
@@ -381,12 +421,13 @@ class Managers extends React.Component {
     setActiveClick(item) {
         if (item.is_validated === true && item.is_active === false) {
             this.props.displayManagerUpdateConfirm({
-                update_confirm_title: "Rendre actif ce compte ?",
-                update_confirm_text: "Voulez vous vraiment rendre actif le compte de cet utilisateur ?",
+                update_confirm_title: Texts.RENDRE_ACTIF_CE_COMPTE.text_fr + " ?",
+                update_confirm_text: Texts.ETES_VOUS_SUR_DE_VOULOIR_RENDRE_ACTIF_CE_COMPTE.text_fr + " ?",
                 update_confirm_is_validation: false,
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
-                update_confirm_is_active: item.is_active
+                update_confirm_is_active: item.is_active,
+                update_confirm_is_validated: item.is_validated
             });
         }
     }
@@ -394,12 +435,13 @@ class Managers extends React.Component {
     setInactiveClick(item) {
         if (item.is_validated === true && item.is_active === true) {
             this.props.displayManagerUpdateConfirm({
-                update_confirm_title: "Rendre inactif ce compte ?",
-                update_confirm_text: "Voulez vous vraiment rendre inactif le compte de cet utilisateur ?",
+                update_confirm_title: Texts.RENDRE_INACTIF_CE_COMPTE.text_fr + " ?",
+                update_confirm_text: Texts.ETES_VOUS_SUR_DE_VOULOIR_RENDRE_INACTIF_CE_COMPTE.text_fr + " ?",
                 update_confirm_is_validation: false,
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
-                update_confirm_is_active: item.is_active
+                update_confirm_is_active: item.is_active,
+                update_confirm_is_validated: item.is_validated
             });
         }
     }
@@ -412,7 +454,7 @@ class Managers extends React.Component {
         if (this.props.update_confirm_is_validation === true) {
             this.setValidation({
                 _id: this.props.update_confirm_id
-            });
+            }, this.props.update_confirm_is_validated);
         } else {
             this.setActivity({
                 _id: this.props.update_confirm_id,
@@ -469,7 +511,7 @@ class Managers extends React.Component {
                                 <td style={{verticalAlign: "middle"}}>{Dates.formatDateOnly(item.creation_date)}</td>
                                 <td style={{verticalAlign: "middle", textAlign: "center"}}>
                                     {
-                                        item.is_validated === false &&
+                                        item.is_refused === false && item.is_validated === false &&
 
                                         (<OverlayTrigger placement="bottom" overlay={this.getValidateOverlay(item)}>
                                             <Button onClick={this.validateClick.bind(this, item)}>
@@ -481,11 +523,39 @@ class Managers extends React.Component {
                                         </OverlayTrigger>)
                                     }
                                     {
+                                        item.is_refused === false && item.is_validated === false &&
+                                        (
+                                            <span>&nbsp;</span>
+                                        )
+                                    }
+                                    {
+                                        item.is_refused === false && item.is_validated === false &&
+
+                                        (<OverlayTrigger placement="bottom" overlay={this.getRefuseOverlay(item)}>
+                                            <Button onClick={this.refuseClick.bind(this, item)}>
+                                                &nbsp;
+                                                <span style={{color: "red"}}>
+                                                    <Glyphicon glyph="remove" />
+                                                </span>&nbsp;
+                                                {Texts.REFUSER.text_fr}
+                                            </Button>
+                                        </OverlayTrigger>)
+                                    }
+                                    {
                                         item.is_validated === true &&
 
                                         <OverlayTrigger placement="bottom" overlay={this.getValidatedOverlay(item)}>
                                             <span style={{color: "green"}}>
                                                 {Texts.VALIDE.text_fr + " ( " + Dates.formatDateOnly(item.validation_date) + " )"}
+                                            </span>
+                                        </OverlayTrigger>
+                                    }
+                                    {
+                                        item.is_refused === true &&
+
+                                        <OverlayTrigger placement="bottom" overlay={this.getRefusedOverlay(item)}>
+                                            <span style={{color: "red"}}>
+                                                {Texts.REFUSE.text_fr + " ( " + Dates.formatDateOnly(item.validation_date) + " )"}
                                             </span>
                                         </OverlayTrigger>
                                     }
@@ -576,6 +646,7 @@ function mapStateToProps(state) {
         update_confirm_id: state.managers.update_confirm_id,
         update_confirm_name: state.managers.update_confirm_name,
         update_confirm_is_active: state.managers.update_confirm_is_active,
+        update_confirm_is_validated: state.managers.update_confirm_is_validated,
 
         showAlert: state.global.showAlert,
         alertTitle: state.global.alertTitle,

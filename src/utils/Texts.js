@@ -653,6 +653,10 @@ const Texts = {
         text_fr: "VALIDÉ",
         text_en: "VALIDATED"
     },
+    REFUSE: {
+        text_fr: "REFUSÉ",
+        text_en: "REFUSED"
+    },
     ACTIVITE: {
         text_fr: "Activité",
         text_en: "Activity"
@@ -661,13 +665,25 @@ const Texts = {
         text_fr: "Valider le compte",
         text_en: "Validate the account"
     },
+    REFUSER_LE_COMPTE: {
+        text_fr: "Refuser le compte",
+        text_en: "Refuse the account"
+    },
     VALIDER: {
         text_fr: "Valider",
         text_en: "Validate"
     },
+    REFUSER: {
+        text_fr: "Refuser",
+        text_en: "Refuse"
+    },
     LE_COMPTE_A_ETE_VALIDE_LE: {
         text_fr: "Le compte a été validé le",
         text_en: "The account has benn validated the"
+    },
+    LE_COMPTE_A_ETE_REFUSE_LE: {
+        text_fr: "Le compte a été refusé le",
+        text_en: "The account has benn refused the"
     },
     PAR: {
         text_fr: "par",
@@ -692,6 +708,38 @@ const Texts = {
     RENDU_ACTIF_PAR: {
         text_fr: "Rendu actif par",
         text_en: "Set active by"
+    },
+    RENDRE_ACTIF_CE_COMPTE: {
+        text_fr: "Rendre actif ce compte",
+        text_en: "Set active this account"
+    },
+    ETES_VOUS_SUR_DE_VOULOIR_RENDRE_ACTIF_CE_COMPTE: {
+        text_fr: "Voulez vous vraiment rendre actif le compte de cet utilisateur",
+        text_en: "Do you really want to set active the account of this user"
+    },
+    RENDRE_INACTIF_CE_COMPTE: {
+        text_fr: "Rendre inactif ce compte",
+        text_en: "Set active this account"
+    },
+    ETES_VOUS_SUR_DE_VOULOIR_RENDRE_INACTIF_CE_COMPTE: {
+        text_fr: "Voulez vous vraiment rendre inactif le compte de cet utilisateur",
+        text_en: "Do you really want to set active the account of this user"
+    },
+    VALIDER_CE_COMPTE: {
+        text_fr: "Valider ce compte",
+        text_en: "Validate this account"
+    },
+    ETES_VOUS_SUR_DE_VOULOIR_VALIDER_CE_COMPTE: {
+        text_fr: "Voulez vous vraiment valider le compte de cet utilisateur",
+        text_en: "Do you really want to validate the account of this user"
+    },
+    REFUSER_CE_COMPTE: {
+        text_fr: "Refuser ce compte",
+        text_en: "Refuse this account"
+    },
+    ETES_VOUS_SUR_DE_VOULOIR_REFUSER_CE_COMPTE: {
+        text_fr: "Voulez vous vraiment refuser le compte de cet utilisateur",
+        text_en: "Do you really want to refuse the account of this user"
     }
 };
 
