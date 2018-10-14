@@ -1,14 +1,24 @@
 const Paths = {
     HOST: "http://localhost:8083",
 
+    PASSWORD: "/password",
+
     REGISTRATION: "/registration",
 
     AUTHENTICATION: "/authentication",
     AUTHENTICATION_TOKEN: "/authenticationtoken",
 
-    PASSWORD: "/password",
+    MANAGER: "/manager",
 
     ACCOUNT: "/account",
+
+    FITNESS_CENTER: "/fitness_center",
+
+    MANAGER_ACTIVITY: "/manager_activity",
+
+    MANAGER_FEEDBACK: "/manager_feedback",
+
+    MODULE: "/module",
 };
 
 export default Paths;

@@ -33,7 +33,8 @@ class Validator {
 
     static password(text) {
         /* Essayer de rajouter d'autre char comme - _ ( ) { } [ ] ... */
-        let regex = new RegExp('^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$','g');
+        //let regex = new RegExp('^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$','g');
+        let regex = new RegExp('^(?=.*\\d)(?=.*[!@#\\$%_\\-\\(\\)\\{\\}\\[\\];,/&\\*\\+\\?\\.:])(?=.*[a-z])(?=.*[A-Z]).{8,}$','g');
         return regex.test(text);
     }
 

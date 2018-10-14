@@ -5,11 +5,13 @@ import {
     SET_ADMINISTRATORS_IS_LOAD,
     SET_FEEDBACKS_IS_LOAD,
     SET_MANAGERS_IS_LOAD,
+    SET_FITNESS_CENTERS_IS_LOAD,
     SET_MODULES_IS_LOAD,
 
     SET_ADMINISTRATORS_IS_NOT_LOAD,
     SET_FEEDBACKS_IS_NOT_LOAD,
     SET_MANAGERS_IS_NOT_LOAD,
+    SET_FITNESS_CENTERS_IS_NOT_LOAD,
     SET_MODULES_IS_NOT_LOAD
 
 } from "./types"
@@ -45,6 +47,12 @@ export const setManagersIsLoad = () => {
     };
 };
 
+export const setFitnessCentersIsLoad = () => {
+    return {
+        type: SET_FITNESS_CENTERS_IS_LOAD
+    };
+};
+
 export const setModulesIsLoad = () => {
     return {
         type: SET_MODULES_IS_LOAD
@@ -66,6 +74,12 @@ export const setFeedbacksIsNotLoad = () => {
 export const setManagersIsNotLoad = () => {
     return {
         type: SET_MANAGERS_IS_NOT_LOAD
+    };
+};
+
+export const setFitnessCentersIsNotLoad = () => {
+    return {
+        type: SET_FITNESS_CENTERS_IS_NOT_LOAD
     };
 };
 

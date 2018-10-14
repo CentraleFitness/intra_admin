@@ -5,11 +5,13 @@ import {
     SET_ADMINISTRATORS_IS_LOAD,
     SET_FEEDBACKS_IS_LOAD,
     SET_MANAGERS_IS_LOAD,
+    SET_FITNESS_CENTERS_IS_LOAD,
     SET_MODULES_IS_LOAD,
 
     SET_ADMINISTRATORS_IS_NOT_LOAD,
     SET_FEEDBACKS_IS_NOT_LOAD,
     SET_MANAGERS_IS_NOT_LOAD,
+    SET_FITNESS_CENTERS_IS_NOT_LOAD,
     SET_MODULES_IS_NOT_LOAD
 
 } from "../actions/types"
@@ -22,6 +24,7 @@ const initialState = {
     administrators_is_load: false,
     feedbacks_is_load: false,
     managers_is_load: false,
+    fitness_centers_is_load: false,
     modules_is_load: false
 };
 
@@ -56,6 +59,11 @@ export default (state = initialState, action) => {
                 ...state,
                 managers_is_load: true
             };
+        case SET_FITNESS_CENTERS_IS_LOAD:
+            return {
+                ...state,
+                fitness_centers_is_load: true
+            };
         case SET_MODULES_IS_LOAD:
             return {
                 ...state,
@@ -76,6 +84,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 managers_is_load: false
+            };
+        case SET_FITNESS_CENTERS_IS_NOT_LOAD:
+            return {
+                ...state,
+                fitness_centers_is_load: false
             };
         case SET_MODULES_IS_NOT_LOAD:
             return {

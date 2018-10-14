@@ -31,7 +31,11 @@ const Fields = {
     AVAILABLE: "available",
     ACTIVITIES: "activities",
     CUSTOM_PROGRAMS: "custom_programs",
-    NB_SUBSCRIBERS: "nb_subscribers"
+    NB_SUBSCRIBERS: "nb_subscribers",
+    FITNESS_CENTER_MANAGER_ID: "fitness_center_manager_id",
+    IS_ACTIVE: "is_active",
+    IS_VALIDATED: "is_validated",
+    ADMINISTRATOR_NAME: "administrator_name"
 };
 
 export default Fields;

@@ -644,6 +644,54 @@ const Texts = {
     ANNULER: {
         text_fr: "Annuler",
         text_en: "Cancel"
+    },
+    VALIDATION: {
+        text_fr: "Validation",
+        text_en: "Validation"
+    },
+    VALIDE: {
+        text_fr: "VALIDÉ",
+        text_en: "VALIDATED"
+    },
+    ACTIVITE: {
+        text_fr: "Activité",
+        text_en: "Activity"
+    },
+    VALIDER_LE_COMPTE: {
+        text_fr: "Valider le compte",
+        text_en: "Validate the account"
+    },
+    VALIDER: {
+        text_fr: "Valider",
+        text_en: "Validate"
+    },
+    LE_COMPTE_A_ETE_VALIDE_LE: {
+        text_fr: "Le compte a été validé le",
+        text_en: "The account has benn validated the"
+    },
+    PAR: {
+        text_fr: "par",
+        text_en: "by"
+    },
+    RENDRE_ACTIF: {
+        text_fr: "Rendre actif",
+        text_en: "Set active"
+    },
+    RENDU_INACTIF_PAR: {
+        text_fr: "Rendu inactif par",
+        text_en: "Set inactive by"
+    },
+    LE: {
+        text_fr: "le",
+        text_en: "the"
+    },
+    RENDRE_INACTIF: {
+        text_fr: "Rendre inactif",
+        text_en: "Set inactive"
+    },
+    RENDU_ACTIF_PAR: {
+        text_fr: "Rendu actif par",
+        text_en: "Set active by"
     }
 };
 
