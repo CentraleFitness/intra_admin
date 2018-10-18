@@ -740,7 +740,40 @@ const Texts = {
     ETES_VOUS_SUR_DE_VOULOIR_REFUSER_CE_COMPTE: {
         text_fr: "Voulez vous vraiment refuser le compte de cet utilisateur",
         text_en: "Do you really want to refuse the account of this user"
+    },
+    AFFICHER_LA_FICHE_COMPLETE: {
+        text_fr: "Afficher la fiche complète",
+        text_en: "Display complete profile"
+    },
+    ACTIF: {
+        text_fr: "ACTIF",
+        text_en: "ACTIVE"
+    },
+    INACTIF: {
+        text_fr: "INACTIF",
+        text_en: "INACTIVE"
+    },
+    DEPUIS: {
+        text_fr: "Depuis",
+        text_en: "Since"
+    },
+    ACTION_EFFECTUEE_PAR: {
+        text_fr: "Action effectuée par",
+        text_en: "Action done by"
+    },
+    ADRESSE_COMPLEMENT: {
+        text_fr: "Adresse complément",
+        text_en: "Address complement"
+    },
+    CREER_UN_COMPTE_ADMINISTRATEUR: {
+        text_fr: "Créer un compte administrateur",
+        text_en: "Create an administrator account"
+    },
+    PAR_SALLE: {
+        text_fr: "Par salle",
+        text_en: "By club"
     }
+
 };
 
 export default Texts;

@@ -4,18 +4,25 @@ import {
     SET_MANAGER_ACTIVITY,
     SET_VALIDATE_MANAGER,
     SET_FITNESS_CENTERS,
+
     SET_MANAGERS_FILTER_NAME,
-    SET_MANAGERS_FILTER_FITNESS_CENTER,
+    SET_MANAGERS_FILTER_SELECT_FITNESS_CENTER,
+    MANAGERS_RESET_FILTER,
+
     DISPLAY_MANAGERS_UPDATE_CONFIRM,
-    DISMISS_MANAGERS_UPDATE_CONFIRM
+    DISMISS_MANAGERS_UPDATE_CONFIRM,
+    DISPLAY_MANAGERS_DETAILS_MODAL,
+    DISMISS_MANAGERS_DETAILS_MODAL
 } from "../actions/types"
 
 const initialState = {
     managers: [],
     initial_managers: [],
     fitness_centers: [],
+
     filter_name: "",
-    filter_fitness_center: {},
+    filter_select_fitness_center: "",
+
     show_update_confirm: false,
     update_confirm_title: "",
     update_confirm_text: "",
@@ -23,7 +30,29 @@ const initialState = {
     update_confirm_id: "",
     update_confirm_name: "",
     update_confirm_is_active: false,
-    update_confirm_is_validated: false
+    update_confirm_is_validated: false,
+
+    show_details_modal: false,
+    details_modal_manager: {
+        creation_date: 0,
+        first_name: "",
+        last_name: "",
+        email_address: "",
+        phone_number: "",
+        is_active: false,
+        last_update_activity: 0,
+        last_update_admin_id: "",
+        last_update_admin_name: "",
+        is_refused: false,
+        is_validated: false,
+        validation_date: 0,
+        validator_admin_id: "",
+        validator_admin_name: "",
+        fitness_center: {
+            creation_date: 0,
+            name: ""
+        }
+    }
 };
 
 export default (state = initialState, action) => {
@@ -96,10 +125,16 @@ export default (state = initialState, action) => {
                 ...state,
                 filter_name: action.payload
             };
-        case SET_MANAGERS_FILTER_FITNESS_CENTER:
+        case SET_MANAGERS_FILTER_SELECT_FITNESS_CENTER:
             return {
                 ...state,
-                filter_fitness_center: action.payload
+                filter_select_fitness_center: action.payload
+            };
+        case MANAGERS_RESET_FILTER:
+            return {
+                ...state,
+                filter_name: initialState.filter_name,
+                filter_select_fitness_center: initialState.filter_select_fitness_center
             };
         case DISPLAY_MANAGERS_UPDATE_CONFIRM:
             return {
@@ -116,14 +151,26 @@ export default (state = initialState, action) => {
         case DISMISS_MANAGERS_UPDATE_CONFIRM:
             return {
                 ...state,
-                show_update_confirm: false,
-                update_confirm_title: "",
-                update_confirm_text: "",
-                update_confirm_is_validation: false,
-                update_confirm_id: "",
-                update_confirm_name: "",
-                update_confirm_is_active: false,
-                update_confirm_is_validated: false
+                show_update_confirm: initialState.show_update_confirm,
+                update_confirm_title: initialState.update_confirm_title,
+                update_confirm_text: initialState.update_confirm_text,
+                update_confirm_is_validation: initialState.update_confirm_is_validation,
+                update_confirm_id: initialState.update_confirm_id,
+                update_confirm_name: initialState.update_confirm_name,
+                update_confirm_is_active: initialState.update_confirm_is_active,
+                update_confirm_is_validated: initialState.update_confirm_is_validated,
+            };
+        case DISPLAY_MANAGERS_DETAILS_MODAL:
+            return {
+                ...state,
+                show_details_modal: true,
+                details_modal_manager: action.payload
+            };
+        case DISMISS_MANAGERS_DETAILS_MODAL:
+            return {
+                ...state,
+                show_details_modal: initialState.show_details_modal,
+                details_modal_manager: initialState.details_modal_manager
             };
         default:
             return state;

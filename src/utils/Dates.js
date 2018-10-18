@@ -1,5 +1,8 @@
 class Dates {
     static format(timestamp) {
+        if (timestamp === undefined || timestamp === null || timestamp === "") {
+            return "oo/oo/oo";
+        }
         let today = new Date(timestamp);
         let dd = today.getDate();
         let mm = today.getMonth() + 1;
@@ -16,6 +19,9 @@ class Dates {
     }
 
     static formatDateOnly(timestamp) {
+        if (timestamp === undefined || timestamp === null || timestamp === "") {
+            return "oo/oo/oo";
+        }
         let today = new Date(timestamp);
         let dd = today.getDate();
         let mm = today.getMonth() + 1;
@@ -26,8 +32,8 @@ class Dates {
     }
 
     static formatYYYYmmDD(timestamp) {
-        if (timestamp === "") {
-            return "";
+        if (timestamp === undefined || timestamp === null || timestamp === "") {
+            return "oo/oo/oo";
         }
         let today = new Date(timestamp);
         let dd = today.getDate();

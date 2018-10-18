@@ -35,7 +35,8 @@ const Fields = {
     FITNESS_CENTER_MANAGER_ID: "fitness_center_manager_id",
     IS_ACTIVE: "is_active",
     IS_VALIDATED: "is_validated",
-    ADMINISTRATOR_NAME: "administrator_name"
+    ADMINISTRATOR_NAME: "administrator_name",
+    ADMINISTRATOR_ID: "administrator_id"
 };
 
 export default Fields;

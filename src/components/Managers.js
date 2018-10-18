@@ -14,8 +14,10 @@ import {
     FormGroup,
     Table,
     OverlayTrigger,
-    Tooltip
+    Tooltip,
+    ButtonGroup
 } from 'react-bootstrap';
+import Select from 'react-select';
 
 import {
     displayAlert,
@@ -30,10 +32,15 @@ import {
     setManagerActivity,
     setValidateManager,
     setFitnessCenters,
+
     setManagersFilterName,
-    setManagersFilterFitnessCenter,
+    setManagersFilterSelectFitnessCenter,
+    managersResetFilters,
+
     displayManagerUpdateConfirm,
-    dismissManagerUpdateConfirm
+    dismissManagerUpdateConfirm,
+    displayManagerDetailsModal,
+    dismissManagerDetailsModal
 } from "../actions/managersActions"
 
 import Texts from "../utils/Texts";
@@ -43,6 +50,8 @@ import Fields from "../utils/Fields";
 import Paths from "../utils/Paths";
 import HttpMethods from "../utils/HttpMethods";
 import Dates from "../utils/Dates";
+
+import 'react-select/dist/react-select.css';
 
 class Managers extends React.Component {
 
@@ -192,6 +201,7 @@ class Managers extends React.Component {
                                 last_update_admin_id: response.data.administrator_id,
                                 last_update_admin_name: response.data.administrator_name
                             });
+                            me.filterName(me.props.filter_name);
                             me.props.dismissManagerUpdateConfirm();
                             me.forceUpdate();
                         }
@@ -233,8 +243,6 @@ class Managers extends React.Component {
             }
         );
     }
-
-    //TODO GERER LES IS_REFUSED
 
     setValidation(item, is_validated) {
         let params = {};
@@ -259,6 +267,7 @@ class Managers extends React.Component {
                                 validator_admin_id: response.data.administrator_id,
                                 validator_admin_name: response.data.administrator_name
                             });
+                            me.filterName(me.props.filter_name);
                             me.props.dismissManagerUpdateConfirm();
                             me.forceUpdate();
                         }
@@ -301,25 +310,63 @@ class Managers extends React.Component {
         );
     }
 
+    resetFilters() {
+        this.props.managersResetFilters();
+        this.props.setManagers(this.props.initial_managers);
+    }
+
     nameFilterChange(event) {
         this.props.setManagersFilterName(event.target.value);
         this.filterName(event.target.value);
     }
 
+    fitnessCenterFilterChange(selected) {
+        this.props.setManagersFilterSelectFitnessCenter(selected.value);
+        this.filterFitnessCenter(selected === undefined ? "" : selected.value);
+    }
+
     filterName(value) {
+
+        let me = this;
         let updatedManagers = this.props.initial_managers;
-        if (value !== "" && value !== null) {
-            updatedManagers = updatedManagers.filter(function (item) {
-                return ((item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
-                    (item.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
-                    (item.email_address.toLowerCase().search(value.toLowerCase()) !== -1));
-            });
-        }
+        updatedManagers = updatedManagers.filter(function (item) {
+            return me.getNameBool(value, item) &&
+                me.getFitnessCenterBool(me.props.filter_select_fitness_center, item);
+        });
         this.props.setManagers(updatedManagers);
+    }
+
+    filterFitnessCenter(value) {
+
+        let me = this;
+        let updatedManagers = this.props.initial_managers;
+        updatedManagers = updatedManagers.filter(function (item) {
+            return me.getNameBool(me.props.filter_name, item) &&
+                me.getFitnessCenterBool(value, item);
+        });
+        this.props.setManagers(updatedManagers);
+    }
+
+    getNameBool(value, item) {
+        return ((item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+            (item.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+            (item.email_address.toLowerCase().search(value.toLowerCase()) !== -1));
+    }
+
+    getFitnessCenterBool(value_select, item) {
+        return (value_select === undefined || value_select === "" || value_select === item.fitness_center._id);
     }
 
     handleAlertDismiss() {
         this.props.dismissAlert();
+    }
+
+    getDetailsOverlay(item) {
+        return (
+            <Tooltip id={"tooltip_details"}>
+                {Texts.AFFICHER_LA_FICHE_COMPLETE.text_fr}
+            </Tooltip>
+        );
     }
 
     getValidateOverlay(item) {
@@ -388,6 +435,10 @@ class Managers extends React.Component {
                 }
             </Tooltip>
         );
+    }
+
+    detailsClick(item) {
+        this.props.displayManagerDetailsModal(item);
     }
 
     validateClick(item) {
@@ -463,36 +514,66 @@ class Managers extends React.Component {
         }
     }
 
+    handleDetailsDismiss() {
+        this.props.dismissManagerDetailsModal();
+    }
+
     render() {
 
         return (
             <Panel header={<div><Glyphicon glyph="user" /> {Texts.GERANT.text_fr + "s"}</div>} bsStyle="primary">
 
-                <Panel header={<div><Glyphicon glyph="filter" /> {Texts.FILTRE.text_fr}</div>}>
-                    <Form horizontal>
-                        <Col xs={12} sm={12} md={6} lg={6}>
+                <Panel>
+                    <Panel header={<div><Glyphicon glyph="filter" /> {Texts.FILTRE.text_fr}</div>}>
+                        <Form horizontal>
+                            <Col xs={12} sm={12} md={6} lg={6}>
 
-                            <FormGroup>
-                                <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
-                                    {Texts.PAR_NOM.text_fr}
-                                </Col>
-                                <Col xs={9} sm={9} md={9} lg={9}>
-                                    <FormControl
-                                        type="text"
-                                        placeholder={Texts.NOM.text_fr}
-                                        value={this.props.filter_name}
-                                        onChange={this.nameFilterChange.bind(this)}
-                                    />
-                                </Col>
-                            </FormGroup>
+                                <FormGroup>
+                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                        {Texts.PAR_NOM.text_fr}
+                                    </Col>
+                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                        <FormControl
+                                            type="text"
+                                            placeholder={Texts.NOM.text_fr}
+                                            value={this.props.filter_name}
+                                            onChange={this.nameFilterChange.bind(this)}
+                                        />
+                                    </Col>
+                                </FormGroup>
 
-                        </Col>
-                    </Form>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6}>
+                                <FormGroup>
+                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                        {Texts.PAR_SALLE.text_fr}
+                                    </Col>
+
+                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                        <Select
+                                            clearable={false}
+                                            value={this.props.filter_select_fitness_center}
+                                            onChange={this.fitnessCenterFilterChange.bind(this)}
+                                            options={this.props.fitness_centers}
+                                        />
+                                    </Col>
+                                </FormGroup>
+
+                            </Col>
+                        </Form>
+                    </Panel>
+                    <Button
+                        className={"pull-right"}
+                        onClick={this.resetFilters.bind(this)}
+                    >
+                        <Glyphicon glyph="refresh" /> {Texts.REINITIALISER_LES_FILTRES.text_fr}
+                    </Button>
                 </Panel>
 
                 <Table responsive>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>{Texts.PRENOM.text_fr}</th>
                             <th>{Texts.NOM.text_fr}</th>
                             <th>{Texts.EMAIL.text_fr}</th>
@@ -505,6 +586,13 @@ class Managers extends React.Component {
                     {
                         this.props.managers !== undefined && this.props.managers.map((item) => (
                             <tr key={item._id}>
+                                <td style={{verticalAlign: "middle"}}>
+                                    <OverlayTrigger placement="bottom" overlay={this.getDetailsOverlay(item)}>
+                                        <Button onClick={this.detailsClick.bind(this, item)}>
+                                            <Glyphicon glyph="eye-open" />
+                                        </Button>
+                                    </OverlayTrigger>
+                                </td>
                                 <td style={{verticalAlign: "middle"}}>{item.first_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.last_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.email_address}</td>
@@ -592,6 +680,321 @@ class Managers extends React.Component {
                     </tbody>
                 </Table>
 
+                <Modal show={this.props.show_details_modal} bsSize={"large"} onHide={this.handleDetailsDismiss.bind(this)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            {
+                                this.props.details_modal_manager.first_name + " " +
+                                this.props.details_modal_manager.last_name + " - " +
+                                this.props.details_modal_manager.fitness_center.name
+                            }
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Panel header={Texts.GERANT.text_fr}>
+                            <Form horizontal>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.DATE_DE_CREATION.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {Dates.format(this.props.details_modal_manager.creation_date)}
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.PRENOM.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.first_name}
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.NOM.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.last_name}
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.EMAIL.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.email_address}
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.TELEPHONE.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.phone_number}
+                                    </Col>
+                                </FormGroup>
+
+                                <br/>
+
+                                {
+                                    this.props.details_modal_manager.is_validated === true &&
+
+                                    (
+                                        <FormGroup>
+                                            <Col xs={2} sm={2} md={2} lg={2}>
+                                                {
+                                                    this.props.details_modal_manager.is_active === true &&
+                                                    (
+                                                        <span style={{fontWeight: "bold", color: "green"}}>
+                                                            {Texts.ACTIF.text_fr}
+                                                        </span>
+                                                    )
+                                                }
+                                                {
+                                                    this.props.details_modal_manager.is_active === false &&
+                                                    (
+                                                        <span style={{fontWeight: "bold", color: "red"}}>
+                                                            {Texts.INACTIF.text_fr}
+                                                        </span>
+                                                    )
+                                                }
+                                            </Col>
+                                            <Col xs={1} sm={1} md={1} lg={1}>
+                                                {Texts.DEPUIS.text_fr}
+                                            </Col>
+                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                                {Dates.format(this.props.details_modal_manager.last_update_activity)}
+                                            </Col>
+                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                                <span style={{fontWeight: "bold"}}>
+                                                    {Texts.ACTION_EFFECTUEE_PAR.text_fr + " :"}
+                                                </span>
+                                            </Col>
+                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                                {this.props.details_modal_manager.last_update_admin_name}
+                                            </Col>
+                                        </FormGroup>
+                                    )
+                                }
+
+                                {
+                                    (
+                                        this.props.details_modal_manager.is_validated === true ||
+                                        this.props.details_modal_manager.is_refused === true
+                                    )
+                                        &&
+                                    (
+                                        <FormGroup>
+                                            <Col xs={2} sm={2} md={2} lg={2}>
+                                                {
+                                                    this.props.details_modal_manager.is_validated === true &&
+                                                    (
+                                                        <span style={{fontWeight: "bold", color: "green"}}>
+                                                            {Texts.VALIDE.text_fr}
+                                                        </span>
+                                                    )
+                                                }
+                                                {
+                                                    this.props.details_modal_manager.is_refused === true &&
+                                                    (
+                                                        <span style={{fontWeight: "bold", color: "red"}}>
+                                                            {Texts.REFUSE.text_fr}
+                                                        </span>
+                                                    )
+                                                }
+                                            </Col>
+                                            <Col xs={1} sm={1} md={1} lg={1}>
+                                                {Texts.DEPUIS.text_fr}
+                                            </Col>
+                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                                {Dates.format(this.props.details_modal_manager.validation_date)}
+                                            </Col>
+                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                                <span style={{fontWeight: "bold"}}>
+                                                    {Texts.ACTION_EFFECTUEE_PAR.text_fr + " :"}
+                                                </span>
+                                            </Col>
+                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                                {this.props.details_modal_manager.validator_admin_name}
+                                            </Col>
+                                        </FormGroup>
+                                    )
+                                }
+
+                            </Form>
+                        </Panel>
+                        <Panel header={Texts.SALLE_SPORT.text_fr}>
+                            <Form horizontal>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.DATE_DE_CREATION.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {Dates.format(this.props.details_modal_manager.fitness_center.creation_date)}
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.NOM.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.fitness_center.name}
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.ADRESSE.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.fitness_center.address}
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.VILLE.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.fitness_center.city}
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.ADRESSE_COMPLEMENT.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {
+                                            (
+                                                (this.props.details_modal_manager.fitness_center.address_second === "" ||
+                                                this.props.details_modal_manager.fitness_center.address_second === null ||
+                                                    this.props.details_modal_manager.fitness_center.address_second === undefined) ?
+                                                "/" : this.props.details_modal_manager.fitness_center.address_second
+                                            )
+
+                                        }
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.CODE_POSTAL.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {this.props.details_modal_manager.fitness_center.zip_code}
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.DESCRIPTION.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        {this.props.details_modal_manager.fitness_center.description}
+                                    </Col>
+                                </FormGroup>
+                            </Form>
+                        </Panel>
+                        {
+                            this.props.details_modal_manager.is_validated === false &&
+                            this.props.details_modal_manager.is_refused === false &&
+
+                            <Panel>
+                                <h3 style={{textAlign: "center"}}>
+                                    {Texts.VALIDATION.text_fr}
+                                </h3>
+                                <Col xs={4} sm={4} md={4} lg={4}>
+                                </Col>
+                                <Col xs={2} sm={2} md={2} lg={2}>
+                                    <Button
+                                        bsStyle={"success"}
+                                        onClick={this.validateClick.bind(this, this.props.details_modal_manager)}
+                                    >
+                                        <Glyphicon glyph="ok" />
+                                        &nbsp;
+                                        {Texts.VALIDER.text_fr}
+                                    </Button>
+                                </Col>
+                                <Col xs={2} sm={2} md={2} lg={2}>
+                                    <Button
+                                        bsStyle={"danger"}
+                                        onClick={this.refuseClick.bind(this, this.props.details_modal_manager)}
+                                    >
+                                        <Glyphicon glyph="remove" />
+                                        &nbsp;
+                                        {Texts.REFUSER.text_fr}
+                                    </Button>
+                                </Col>
+                                <Col xs={4} sm={4} md={4} lg={4}>
+                                </Col>
+                            </Panel>
+                        }
+                        {
+                            this.props.details_modal_manager.is_validated === true
+
+                            &&
+
+                            <Panel>
+                                <h3 style={{textAlign: "center"}}>
+                                    {Texts.ACTIVITE.text_fr}
+                                </h3>
+                                <Col xs={5} sm={5} md={5} lg={5}>
+                                </Col>
+
+                                <Col xs={1} sm={1} md={1} lg={1}>
+                                    {
+                                        this.props.details_modal_manager.is_validated === true &&
+                                        this.props.details_modal_manager.is_active === false &&
+
+                                        <Button onClick={this.setActiveClick.bind(this, this.props.details_modal_manager)}>
+                                            <span style={{color: "blue"}}>
+                                                <Glyphicon glyph="off" />
+                                            </span>&nbsp;
+                                            {Texts.RENDRE_ACTIF.text_fr}
+                                        </Button>
+                                    }
+                                    {
+                                        this.props.details_modal_manager.is_validated === true &&
+                                        this.props.details_modal_manager.is_active === true &&
+
+                                        <Button onClick={this.setInactiveClick.bind(this, this.props.details_modal_manager)}>
+                                            <span style={{color: "red"}}>
+                                                <Glyphicon glyph="off" />
+                                            </span>&nbsp;
+                                            {Texts.RENDRE_INACTIF.text_fr}
+                                        </Button>
+                                    }
+                                </Col>
+
+                                <Col xs={5} sm={5} md={5} lg={5}>
+                                </Col>
+                            </Panel>
+                        }
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.handleDetailsDismiss.bind(this)}><Glyphicon glyph="remove" /> {Texts.FERMER.text_fr}</Button>
+                    </Modal.Footer>
+                </Modal>
+
                 <Modal show={this.props.showAlert} bsSize={"small"} onHide={this.handleAlertDismiss.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title>{this.props.alertTitle}</Modal.Title>
@@ -636,8 +1039,9 @@ function mapStateToProps(state) {
         managers: state.managers.managers,
         initial_managers: state.managers.initial_managers,
         fitness_centers: state.managers.fitness_centers,
+
         filter_name: state.managers.filter_name,
-        filter_fitness_center: state.managers.filter_fitness_center,
+        filter_select_fitness_center: state.managers.filter_select_fitness_center,
 
         show_update_confirm: state.managers.show_update_confirm,
         update_confirm_title: state.managers.update_confirm_title,
@@ -647,6 +1051,9 @@ function mapStateToProps(state) {
         update_confirm_name: state.managers.update_confirm_name,
         update_confirm_is_active: state.managers.update_confirm_is_active,
         update_confirm_is_validated: state.managers.update_confirm_is_validated,
+
+        show_details_modal: state.managers.show_details_modal,
+        details_modal_manager: state.managers.details_modal_manager,
 
         showAlert: state.global.showAlert,
         alertTitle: state.global.alertTitle,
@@ -662,10 +1069,15 @@ export default connect(mapStateToProps, {
     setManagerActivity,
     setValidateManager,
     setFitnessCenters,
+
     setManagersFilterName,
-    setManagersFilterFitnessCenter,
+    setManagersFilterSelectFitnessCenter,
+    managersResetFilters,
+
     displayManagerUpdateConfirm,
     dismissManagerUpdateConfirm,
+    displayManagerDetailsModal,
+    dismissManagerDetailsModal,
 
     displayAlert,
     dismissAlert,

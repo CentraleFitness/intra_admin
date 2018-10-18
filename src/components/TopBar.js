@@ -41,10 +41,7 @@ class TopBar extends React.Component {
             modalTitle: "",
             old_password: "",
             password: "",
-            confirm_password: "",
-            showAlert: false,
-            alertTitle: "",
-            alertText: ""
+            confirm_password: ""
         };
     }
 
@@ -81,11 +78,7 @@ class TopBar extends React.Component {
     }
 
     handleAlertDismiss() {
-        this.setState({
-            showAlert: false,
-            alertTitle: "",
-            alertText: ""
-        });
+        this.props.dismissAlert();
     }
 
     handleConfirmChangePassword() {
@@ -94,8 +87,7 @@ class TopBar extends React.Component {
             !Validator.password(this.state.password) ||
             !Validator.password(this.state.confirm_password)) {
 
-            this.setState({
-                showAlert: true,
+            this.props.displayAlert({
                 alertTitle: Texts.ERREUR_TITRE.text_fr,
                 alertText: Texts.ERR_REMPLIR_TOUS_CHAMPS.text_fr
             });
@@ -105,8 +97,7 @@ class TopBar extends React.Component {
 
         if (this.state.confirm_password !== this.state.password) {
 
-            this.setState({
-                showAlert: true,
+            this.props.displayAlert({
                 alertTitle: Texts.ERREUR_TITRE.text_fr,
                 alertText: Texts.ERR_CONFIRM_MDP.text_fr
             });
@@ -134,10 +125,10 @@ class TopBar extends React.Component {
 
                         me.handleModalDismiss();
 
+                        console.log(response.data.token);
                         localStorage.setItem('token', response.data.token);
 
-                        me.setState({
-                            showAlert: true,
+                        me.props.displayAlert({
                             alertTitle: Texts.CHANGE_MDP_TITRE.text_fr,
                             alertText: Texts.MDP_A_BIEN_ETE_MIS_A_JOUR.text_fr
                         });
@@ -152,23 +143,20 @@ class TopBar extends React.Component {
                             }
                         }
 
-                        me.setState({
-                            showAlert: true,
+                        me.props.displayAlert({
                             alertTitle: Texts.ERREUR_TITRE.text_fr,
                             alertText: message
                         });
                     }
                 } else {
-                    me.setState({
-                        showAlert: true,
+                    me.props.displayAlert({
                         alertTitle: Texts.ERREUR_TITRE.text_fr,
                         alertText: Texts.ERR_RESEAU.text_fr
                     });
                 }
             },
             function (error) {
-                me.setState({
-                    showAlert: true,
+                me.props.displayAlert({
                     alertTitle: Texts.ERREUR_TITRE.text_fr,
                     alertText: Texts.ERR_RESEAU.text_fr
                 });
