@@ -16,9 +16,13 @@ const Paths = {
 
     MANAGER_ACTIVITY: "/manager_activity",
 
+    MANAGER_UNDO_REFUSE: "/manager_undo_refuse",
+
     MANAGER_FEEDBACK: "/manager_feedback",
 
     MODULE: "/module",
+
+    MODULE_STATE: "/module_state",
 };
 
 export default Paths;

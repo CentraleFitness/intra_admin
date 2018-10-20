@@ -14,8 +14,7 @@ import {
     FormGroup,
     Table,
     OverlayTrigger,
-    Tooltip,
-    ButtonGroup
+    Tooltip
 } from 'react-bootstrap';
 import Select from 'react-select';
 
@@ -31,6 +30,7 @@ import {
     setInitialManagers,
     setManagerActivity,
     setValidateManager,
+    setUndoRefuseManager,
     setFitnessCenters,
 
     setManagersFilterName,
@@ -310,6 +310,67 @@ class Managers extends React.Component {
         );
     }
 
+    undoRefuse(item) {
+        let params = {};
+
+        params[Fields.TOKEN] = localStorage.getItem("token");
+        params[Fields.FITNESS_CENTER_MANAGER_ID] = item._id;
+
+        let me = this;
+
+        let communication = new Communication(HttpMethods.PUT, Paths.HOST + Paths.MANAGER_UNDO_REFUSE, params);
+        communication.sendRequest(
+            function (response) {
+                if (response.status === 200) {
+                    if (response.data.code === Status.GENERIC_OK.code) {
+
+                        if (me !== undefined) {
+                            me.props.setUndoRefuseManager({
+                                _id: item._id
+                            });
+                            me.filterName(me.props.filter_name);
+                            me.props.dismissManagerUpdateConfirm();
+                            me.forceUpdate();
+                        }
+
+                    } else {
+
+                        let message = "";
+                        for (let key in Status) {
+                            if (Status[key].code === response.data.code) {
+                                message = Status[key].message_fr;
+                                break;
+                            }
+                        }
+
+                        if (me !== undefined) {
+                            me.props.displayAlert({
+                                alertTitle: Texts.ERREUR_TITRE.text_fr,
+                                alertText: message
+                            });
+                        }
+                    }
+                } else {
+                    if (me !== undefined) {
+                        me.props.displayAlert({
+                            alertTitle: Texts.ERREUR_TITRE.text_fr,
+                            alertText: Texts.ERR_RESEAU.text_fr
+                        });
+                    }
+                }
+            },
+            function (error) {
+
+                if (me !== undefined) {
+                    me.props.displayAlert({
+                        alertTitle: Texts.ERREUR_TITRE.text_fr,
+                        alertText: Texts.ERR_RESEAU.text_fr
+                    });
+                }
+            }
+        );
+    }
+
     resetFilters() {
         this.props.managersResetFilters();
         this.props.setManagers(this.props.initial_managers);
@@ -450,7 +511,8 @@ class Managers extends React.Component {
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
                 update_confirm_is_active: item.is_active,
-                update_confirm_is_validated: true
+                update_confirm_is_validated: true,
+                update_confirm_is_undo_refuse: false
             });
         }
     }
@@ -464,7 +526,8 @@ class Managers extends React.Component {
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
                 update_confirm_is_active: item.is_active,
-                update_confirm_is_validated: false
+                update_confirm_is_validated: false,
+                update_confirm_is_undo_refuse: false
             });
         }
     }
@@ -478,7 +541,8 @@ class Managers extends React.Component {
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
                 update_confirm_is_active: item.is_active,
-                update_confirm_is_validated: item.is_validated
+                update_confirm_is_validated: item.is_validated,
+                update_confirm_is_undo_refuse: false
             });
         }
     }
@@ -492,7 +556,23 @@ class Managers extends React.Component {
                 update_confirm_id: item._id,
                 update_confirm_name: item.first_name + " " + item.last_name,
                 update_confirm_is_active: item.is_active,
-                update_confirm_is_validated: item.is_validated
+                update_confirm_is_validated: item.is_validated,
+                update_confirm_is_undo_refuse: false
+            });
+        }
+    }
+
+    undoRefuseClick(item) {
+        if (item.is_refused === true && item.is_validated === false) {
+            this.props.displayManagerUpdateConfirm({
+                update_confirm_title: Texts.ANNULER_LE_REFUS.text_fr + " ?",
+                update_confirm_text: Texts.ETES_VOUS_SUR_DE_VOULOIR_ANNULER_LE_REFUS_SUR_CE_COMPTE.text_fr + " ?",
+                update_confirm_is_validation: false,
+                update_confirm_id: item._id,
+                update_confirm_name: item.first_name + " " + item.last_name,
+                update_confirm_is_active: item.is_active,
+                update_confirm_is_validated: item.is_validated,
+                update_confirm_is_undo_refuse: true
             });
         }
     }
@@ -502,7 +582,11 @@ class Managers extends React.Component {
     }
 
     confirmUpdateModal() {
-        if (this.props.update_confirm_is_validation === true) {
+        if (this.props.update_confirm_is_undo_refuse === true) {
+            this.undoRefuse({
+                _id: this.props.update_confirm_id
+            });
+        } else if (this.props.update_confirm_is_validation === true) {
             this.setValidation({
                 _id: this.props.update_confirm_id
             }, this.props.update_confirm_is_validated);
@@ -563,7 +647,7 @@ class Managers extends React.Component {
                         </Form>
                     </Panel>
                     <Button
-                        className={"pull-right"}
+                        className={"pull-left"}
                         onClick={this.resetFilters.bind(this)}
                     >
                         <Glyphicon glyph="refresh" /> {Texts.REINITIALISER_LES_FILTRES.text_fr}
@@ -924,8 +1008,9 @@ class Managers extends React.Component {
                                 </h3>
                                 <Col xs={4} sm={4} md={4} lg={4}>
                                 </Col>
-                                <Col xs={2} sm={2} md={2} lg={2}>
+                                <Col xs={1} sm={1} md={1} lg={1}>
                                     <Button
+                                        className={"pull-left"}
                                         bsStyle={"success"}
                                         onClick={this.validateClick.bind(this, this.props.details_modal_manager)}
                                     >
@@ -935,7 +1020,10 @@ class Managers extends React.Component {
                                     </Button>
                                 </Col>
                                 <Col xs={2} sm={2} md={2} lg={2}>
+                                </Col>
+                                <Col xs={1} sm={1} md={1} lg={1}>
                                     <Button
+                                        className={"pull-right"}
                                         bsStyle={"danger"}
                                         onClick={this.refuseClick.bind(this, this.props.details_modal_manager)}
                                     >
@@ -983,6 +1071,33 @@ class Managers extends React.Component {
                                             {Texts.RENDRE_INACTIF.text_fr}
                                         </Button>
                                     }
+                                </Col>
+
+                                <Col xs={5} sm={5} md={5} lg={5}>
+                                </Col>
+                            </Panel>
+                        }
+                        {
+                            this.props.details_modal_manager.is_refused === true
+
+                            &&
+
+                            <Panel>
+                                <h3 style={{textAlign: "center"}}>
+                                    {Texts.VALIDATION.text_fr}
+                                </h3>
+                                <Col xs={5} sm={5} md={5} lg={5}>
+                                </Col>
+
+                                <Col xs={1} sm={1} md={1} lg={1}>
+
+                                    <Button onClick={this.undoRefuseClick.bind(this, this.props.details_modal_manager)}>
+                                        <span style={{color: "red"}}>
+                                            <Glyphicon glyph="repeat" />
+                                        </span>&nbsp;
+                                        {Texts.ANNULER_LE_REFUS.text_fr}
+                                    </Button>
+
                                 </Col>
 
                                 <Col xs={5} sm={5} md={5} lg={5}>
@@ -1051,6 +1166,7 @@ function mapStateToProps(state) {
         update_confirm_name: state.managers.update_confirm_name,
         update_confirm_is_active: state.managers.update_confirm_is_active,
         update_confirm_is_validated: state.managers.update_confirm_is_validated,
+        update_confirm_is_undo_refuse: state.managers.update_confirm_is_undo_refuse,
 
         show_details_modal: state.managers.show_details_modal,
         details_modal_manager: state.managers.details_modal_manager,
@@ -1068,6 +1184,7 @@ export default connect(mapStateToProps, {
     setInitialManagers,
     setManagerActivity,
     setValidateManager,
+    setUndoRefuseManager,
     setFitnessCenters,
 
     setManagersFilterName,

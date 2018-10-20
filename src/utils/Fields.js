@@ -36,7 +36,13 @@ const Fields = {
     IS_ACTIVE: "is_active",
     IS_VALIDATED: "is_validated",
     ADMINISTRATOR_NAME: "administrator_name",
-    ADMINISTRATOR_ID: "administrator_id"
+    ADMINISTRATOR_ID: "administrator_id",
+    MODULE_ID: "module_id",
+    UUID: "uuid",
+    AUTO_GENERATE_UUID: "auto_generate_uuid",
+    FITNESS_CENTER_ID: "fitness_center_id",
+    MACHINE_TYPE: "machine_type",
+    MODULE_STATE_CODE: "module_state_code"
 };
 
 export default Fields;

@@ -14,7 +14,8 @@ import {
     ControlLabel,
     OverlayTrigger,
     Table,
-    Tooltip
+    Tooltip,
+    HelpBlock
 } from 'react-bootstrap';
 
 import {
@@ -287,8 +288,7 @@ class Administrators extends React.Component {
         let updatedAdmins = this.props.initial_administrators;
         if (value !== "" && value !== null) {
             updatedAdmins = updatedAdmins.filter(function (item) {
-                return me.getNameBool(value, item) &&
-                    me.getFitnessCenterBool(me.props.filter_select_fitness_center, item);
+                return me.getNameBool(value, item);
             });
         }
         this.props.setAdministrators(updatedAdmins);
@@ -702,6 +702,9 @@ class Administrators extends React.Component {
                                             value={this.props.edit_modal_admininistrator.password}
                                             onChange={this.handlePasswordChange.bind(this)}
                                         />
+                                        <HelpBlock>
+                                            {Texts.REGLE_MDP.text_fr}
+                                        </HelpBlock>
                                     </Col>
                                 </FormGroup>
                             }

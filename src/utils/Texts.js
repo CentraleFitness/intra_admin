@@ -76,8 +76,8 @@ const Texts = {
         text_en: "Close"
     },
     REGLE_MDP: {
-        text_fr: "Le mot de pass doit contenir 8 caractères et au moins une majuscule, une minuscule, un charactère spécial et un chiffre.",
-        text_en: "The password must contain 8 characters and at least one up case, one low case, one special character and one digit."
+        text_fr: "Le mot de passe doit contenir au moins 8 caractères et au moins une majuscule, une minuscule, un caractère spécial ( ! @ # $ % _ - ( ) { } [ ] ; , / & * + ? . : ) et un chiffre.",
+        text_en: "The password must contain at least 8 characters and at least one up case, one low case, one special character ( ! @ # $ % _ - ( ) { } [ ] ; , / & * + ? . : ) and one digit."
     },
     MDP_ACTUEL: {
         text_fr: "Mot de passe actuel",
@@ -772,8 +772,43 @@ const Texts = {
     PAR_SALLE: {
         text_fr: "Par salle",
         text_en: "By club"
+    },
+    ANNULER_LE_REFUS: {
+        text_fr: "Annuler le refus",
+        text_en: "Undo refuse"
+    },
+    ETES_VOUS_SUR_DE_VOULOIR_ANNULER_LE_REFUS_SUR_CE_COMPTE: {
+        text_fr: "Voulez vous vraiment annuler le refus sur le compte de cet utilisateur",
+        text_en: "Do you really want to undo the refuse on the account of this user"
+    },
+    UUID: {
+        text_fr: "UUID",
+        text_en: "UUID"
+    },
+    PAR_UUID: {
+        text_fr: "Par UUID",
+        text_en: "By UUID"
+    },
+    CREER_UN_MODULE: {
+        text_fr: "Créer un module",
+        text_en: "Create a module"
+    },
+    MODULE: {
+        text_fr: "Module",
+        text_en: "Module"
+    },
+    GENERER_AUTOMATIQUEMENT_LE_UUID: {
+        text_fr: "Générer automatiquement le UUID",
+        text_en: "Automatically generate UUID"
+    },
+    ETAT_DU_MODULE: {
+        text_fr: "Etat du module",
+        text_en: "Module state"
+    },
+    REGLE_UUID: {
+        text_fr: "Le UUID doit être formaté de la facon suivante : xxx:xxx:xxx avec \"x\" étant un chiffre. Exemple : 001:001:001.",
+        text_en: "The UUID should be formatted following this : xxx:xxx:xxx with \"x\" being a digit. Example: 001:001:001."
     }
-
 };
 
 export default Texts;

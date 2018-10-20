@@ -20,7 +20,14 @@ import { connect } from 'react-redux';
 
 import {
     displayAlert,
-    dismissAlert
+    dismissAlert,
+    setAdministratorsIsNotLoad,
+    setUsersFeedbacksIsNotLoad,
+    setManagersFeedbacksIsNotLoad,
+    setManagersIsNotLoad,
+    setFitnessCentersIsNotLoad,
+    setModulesIsNotLoad,
+    setModuleStatesIsNotLoad
 } from "../actions/globalActions";
 
 import '../styles/TopBar.css';
@@ -49,7 +56,13 @@ class TopBar extends React.Component {
         localStorage.removeItem("token");
         //this.props.resetProfileInfo();
 
-        //this.props.setStatisticsIsNotLoad();
+        this.props.setAdministratorsIsNotLoad();
+        this.props.setUsersFeedbacksIsNotLoad();
+        this.props.setManagersFeedbacksIsNotLoad();
+        this.props.setManagersIsNotLoad();
+        this.props.setFitnessCentersIsNotLoad();
+        this.props.setModulesIsNotLoad();
+        this.props.setModuleStatesIsNotLoad();
 
         browserHistory.replace("/auth");
     }
@@ -322,5 +335,12 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
     displayAlert,
-    dismissAlert
+    dismissAlert,
+    setAdministratorsIsNotLoad,
+    setUsersFeedbacksIsNotLoad,
+    setManagersFeedbacksIsNotLoad,
+    setManagersIsNotLoad,
+    setFitnessCentersIsNotLoad,
+    setModulesIsNotLoad,
+    setModuleStatesIsNotLoad
 })(TopBar);

@@ -3,6 +3,7 @@ import {
     SET_INITIAL_MANAGERS,
     SET_MANAGER_ACTIVITY,
     SET_VALIDATE_MANAGER,
+    SET_UNDO_REFUSE_MANAGER,
     SET_FITNESS_CENTERS,
 
     SET_MANAGERS_FILTER_NAME,
@@ -39,6 +40,13 @@ export const setManagerActivity = (manager) => {
 export const setValidateManager = (manager) => {
     return {
         type: SET_VALIDATE_MANAGER,
+        payload: manager
+    };
+};
+
+export const setUndoRefuseManager = (manager) => {
+    return {
+        type: SET_UNDO_REFUSE_MANAGER,
         payload: manager
     };
 };

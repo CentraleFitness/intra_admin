@@ -41,6 +41,11 @@ class Validator {
     static date(date) {
         return (date !== "");
     }
+
+    static uuid(text) {
+        let regex = new RegExp('^[0-9]{3}[:]{1}[0-9]{3}[:]{1}[0-9]{3}$','i');
+        return regex.test(text);
+    }
 }
 
 export default Validator;

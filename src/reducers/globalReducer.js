@@ -3,16 +3,20 @@ import {
     DISMISS_ALERT,
 
     SET_ADMINISTRATORS_IS_LOAD,
-    SET_FEEDBACKS_IS_LOAD,
+    SET_USERS_FEEDBACKS_IS_LOAD,
+    SET_MANAGERS_FEEDBACKS_IS_LOAD,
     SET_MANAGERS_IS_LOAD,
     SET_FITNESS_CENTERS_IS_LOAD,
     SET_MODULES_IS_LOAD,
+    SET_MODULE_STATES_IS_LOAD,
 
     SET_ADMINISTRATORS_IS_NOT_LOAD,
-    SET_FEEDBACKS_IS_NOT_LOAD,
+    SET_USERS_FEEDBACKS_IS_NOT_LOAD,
+    SET_MANAGERS_FEEDBACKS_IS_NOT_LOAD,
     SET_MANAGERS_IS_NOT_LOAD,
     SET_FITNESS_CENTERS_IS_NOT_LOAD,
-    SET_MODULES_IS_NOT_LOAD
+    SET_MODULES_IS_NOT_LOAD,
+    SET_MODULE_STATES_IS_NOT_LOAD
 
 } from "../actions/types"
 
@@ -22,10 +26,12 @@ const initialState = {
     alertText: "",
 
     administrators_is_load: false,
-    feedbacks_is_load: false,
+    users_feedbacks_is_load: false,
+    managers_feedbacks_is_load: false,
     managers_is_load: false,
     fitness_centers_is_load: false,
-    modules_is_load: false
+    modules_is_load: false,
+    module_states_is_load: false
 };
 
 export default (state = initialState, action) => {
@@ -49,10 +55,15 @@ export default (state = initialState, action) => {
                 ...state,
                 administrators_is_load: true
             };
-        case SET_FEEDBACKS_IS_LOAD:
+        case SET_USERS_FEEDBACKS_IS_LOAD:
             return {
                 ...state,
-                feedbacks_is_load: true
+                users_feedbacks_is_load: true
+            };
+        case SET_MANAGERS_FEEDBACKS_IS_LOAD:
+            return {
+                ...state,
+                managers_feedbacks_is_load: true
             };
         case SET_MANAGERS_IS_LOAD:
             return {
@@ -69,16 +80,27 @@ export default (state = initialState, action) => {
                 ...state,
                 modules_is_load: true
             };
+        case SET_MODULE_STATES_IS_LOAD:
+            return {
+                ...state,
+                module_states_is_load: true
+            };
+
 
         case SET_ADMINISTRATORS_IS_NOT_LOAD:
             return {
                 ...state,
                 administrators_is_load: false
             };
-        case SET_FEEDBACKS_IS_NOT_LOAD:
+        case SET_USERS_FEEDBACKS_IS_NOT_LOAD:
             return {
                 ...state,
-                feedbacks_is_load: false
+                users_feedbacks_is_load: false
+            };
+        case SET_MANAGERS_FEEDBACKS_IS_NOT_LOAD:
+            return {
+                ...state,
+                managers_feedbacks_is_load: false
             };
         case SET_MANAGERS_IS_NOT_LOAD:
             return {
@@ -94,6 +116,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 modules_is_load: false
+            };
+        case SET_MODULE_STATES_IS_NOT_LOAD:
+            return {
+                ...state,
+                module_states_is_load: false
             };
         default:
             return state;

@@ -3,6 +3,7 @@ import {
     SET_INITIAL_MANAGERS,
     SET_MANAGER_ACTIVITY,
     SET_VALIDATE_MANAGER,
+    SET_UNDO_REFUSE_MANAGER,
     SET_FITNESS_CENTERS,
 
     SET_MANAGERS_FILTER_NAME,
@@ -31,6 +32,7 @@ const initialState = {
     update_confirm_name: "",
     update_confirm_is_active: false,
     update_confirm_is_validated: false,
+    update_confirm_is_undo_refuse: false,
 
     show_details_modal: false,
     details_modal_manager: {
@@ -115,6 +117,32 @@ export default (state = initialState, action) => {
                 initial_managers: tmp_manager_validation_update,
                 managers: tmp_manager_validation_update
             };
+        case SET_UNDO_REFUSE_MANAGER:
+
+            let tmp_manager_validation_undo_refuse = state.initial_managers;
+            let index_val_undo = tmp_manager_validation_undo_refuse.findIndex(function (item) {
+                return item._id === action.payload._id;
+            });
+            if (index_val_undo !== -1) {
+
+                tmp_manager_validation_undo_refuse[index_val_undo].is_active = false;
+                tmp_manager_validation_undo_refuse[index_val_undo].is_validated = false;
+                tmp_manager_validation_undo_refuse[index_val_undo].is_refused = false;
+
+                tmp_manager_validation_undo_refuse[index_val_undo].last_update_activity = 0;
+                tmp_manager_validation_undo_refuse[index_val_undo].last_update_admin_id = "";
+                tmp_manager_validation_undo_refuse[index_val_undo].last_update_admin_name = "";
+
+                tmp_manager_validation_undo_refuse[index_val_undo].validation_date = 0;
+                tmp_manager_validation_undo_refuse[index_val_undo].validator_admin_id = "";
+                tmp_manager_validation_undo_refuse[index_val_undo].validator_admin_name = "";
+
+            }
+            return {
+                ...state,
+                initial_managers: tmp_manager_validation_undo_refuse,
+                managers: tmp_manager_validation_undo_refuse
+            };
         case SET_FITNESS_CENTERS:
             return {
                 ...state,
@@ -146,7 +174,8 @@ export default (state = initialState, action) => {
                 update_confirm_id: action.payload.update_confirm_id,
                 update_confirm_name: action.payload.update_confirm_name,
                 update_confirm_is_active: action.payload.update_confirm_is_active,
-                update_confirm_is_validated: action.payload.update_confirm_is_validated
+                update_confirm_is_validated: action.payload.update_confirm_is_validated,
+                update_confirm_is_undo_refuse: action.payload.update_confirm_is_undo_refuse
             };
         case DISMISS_MANAGERS_UPDATE_CONFIRM:
             return {
@@ -159,6 +188,7 @@ export default (state = initialState, action) => {
                 update_confirm_name: initialState.update_confirm_name,
                 update_confirm_is_active: initialState.update_confirm_is_active,
                 update_confirm_is_validated: initialState.update_confirm_is_validated,
+                update_confirm_is_undo_refuse: initialState.update_confirm_is_undo_refuse
             };
         case DISPLAY_MANAGERS_DETAILS_MODAL:
             return {
