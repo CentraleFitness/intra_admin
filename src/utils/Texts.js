@@ -808,6 +808,30 @@ const Texts = {
     REGLE_UUID: {
         text_fr: "Le UUID doit être formaté de la facon suivante : xxx:xxx:xxx avec \"x\" étant un chiffre. Exemple : 001:001:001.",
         text_en: "The UUID should be formatted following this : xxx:xxx:xxx with \"x\" being a digit. Example: 001:001:001."
+    },
+    STATUS: {
+        text_fr: "Status",
+        text_en: "Status"
+    },
+    PRINCIPAL: {
+        text_fr: "Principal",
+        text_en: "Principal"
+    },
+    SECONDAIRE: {
+        text_fr: "Secondaire",
+        text_en: "Secondary"
+    },
+    ADMIN: {
+        text_fr: "Admin",
+        text_en: "Admin"
+    },
+    SIRET: {
+        text_fr: "Numero de SIRET",
+        text_en: "SIRET number"
+    },
+    CONSULTER: {
+        text_fr: "Consulter",
+        text_en: "Consult"
     }
 };
 

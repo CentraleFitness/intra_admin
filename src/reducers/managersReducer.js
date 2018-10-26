@@ -45,11 +45,14 @@ const initialState = {
         last_update_activity: 0,
         last_update_admin_id: "",
         last_update_admin_name: "",
+        last_update_admin_is_manager: false,
         is_refused: false,
         is_validated: false,
         validation_date: 0,
         validator_admin_id: "",
         validator_admin_name: "",
+        validator_admin_is_manager: false,
+        is_principal: false,
         fitness_center: {
             creation_date: 0,
             name: ""
@@ -80,6 +83,7 @@ export default (state = initialState, action) => {
                 tmp_manager_activity_update[index].last_update_activity = action.payload.time;
                 tmp_manager_activity_update[index].last_update_admin_id = action.payload.last_update_admin_id;
                 tmp_manager_activity_update[index].last_update_admin_name = action.payload.last_update_admin_name;
+                tmp_manager_activity_update[index].last_update_admin_is_manager = false;
             }
             return {
                 ...state,
@@ -101,6 +105,7 @@ export default (state = initialState, action) => {
                     tmp_manager_validation_update[index_val].last_update_activity = action.payload.time;
                     tmp_manager_validation_update[index_val].last_update_admin_id = action.payload.validator_admin_id;
                     tmp_manager_validation_update[index_val].last_update_admin_name = action.payload.validator_admin_name;
+                    tmp_manager_validation_update[index_val].last_update_admin_is_manager = false;
                 } else {
                     tmp_manager_validation_update[index_val].is_active = false;
                     tmp_manager_validation_update[index_val].is_validated = false;
@@ -109,6 +114,7 @@ export default (state = initialState, action) => {
                 tmp_manager_validation_update[index_val].validation_date = action.payload.time;
                 tmp_manager_validation_update[index_val].validator_admin_id = action.payload.validator_admin_id;
                 tmp_manager_validation_update[index_val].validator_admin_name = action.payload.validator_admin_name;
+                tmp_manager_validation_update[index_val].validator_admin_is_manager = false;
 
 
             }

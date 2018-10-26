@@ -453,7 +453,8 @@ class Managers extends React.Component {
                     Texts.LE_COMPTE_A_ETE_VALIDE_LE.text_fr + " " +
                     Dates.format(item.validation_date) + " " +
                     Texts.PAR.text_fr + " " +
-                    item.validator_admin_name
+                    item.validator_admin_name +
+                    " (" + (item.validator_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") "
                 }
             </Tooltip>
         );
@@ -466,7 +467,8 @@ class Managers extends React.Component {
                     Texts.LE_COMPTE_A_ETE_REFUSE_LE.text_fr + " " +
                     Dates.format(item.validation_date) + " " +
                     Texts.PAR.text_fr + " " +
-                    item.validator_admin_name
+                    item.validator_admin_name +
+                    " (" + (item.validator_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") "
                 }
             </Tooltip>
         );
@@ -477,7 +479,8 @@ class Managers extends React.Component {
             <Tooltip id={"tooltip_set_active"}>
                 {
                     Texts.RENDU_INACTIF_PAR.text_fr + " " +
-                    item.last_update_admin_name + " " +
+                    item.last_update_admin_name +
+                    " (" + (item.last_update_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") " +
                     Texts.LE.text_fr + " " +
                     Dates.format(item.last_update_activity)
                 }
@@ -490,7 +493,8 @@ class Managers extends React.Component {
             <Tooltip id={"tooltip_set_inactive"}>
                 {
                     Texts.RENDU_ACTIF_PAR.text_fr + " " +
-                    item.last_update_admin_name + " " +
+                    item.last_update_admin_name +
+                    " (" + (item.last_update_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") " +
                     Texts.LE.text_fr + " " +
                     Dates.format(item.last_update_activity)
                 }
@@ -661,6 +665,7 @@ class Managers extends React.Component {
                             <th>{Texts.PRENOM.text_fr}</th>
                             <th>{Texts.NOM.text_fr}</th>
                             <th>{Texts.EMAIL.text_fr}</th>
+                            <th>{Texts.STATUS.text_fr}</th>
                             <th>{Texts.DATE_DE_CREATION.text_fr}</th>
                             <th style={{textAlign: "center"}}>{Texts.VALIDATION.text_fr}</th>
                             <th style={{textAlign: "center"}}>{Texts.ACTIVITE.text_fr}</th>
@@ -680,6 +685,21 @@ class Managers extends React.Component {
                                 <td style={{verticalAlign: "middle"}}>{item.first_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.last_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.email_address}</td>
+                                <td style={{verticalAlign: "middle"}}>
+                                    {
+                                        item.is_principal === true &&
+
+                                        <span>
+                                            <Glyphicon glyph="certificate" /> {Texts.PRINCIPAL.text_fr}
+                                        </span>
+                                    }
+                                    {
+                                        item.is_principal === false &&
+                                        <span>
+                                            {Texts.SECONDAIRE.text_fr}
+                                        </span>
+                                    }
+                                </td>
                                 <td style={{verticalAlign: "middle"}}>{Dates.formatDateOnly(item.creation_date)}</td>
                                 <td style={{verticalAlign: "middle", textAlign: "center"}}>
                                     {
@@ -768,9 +788,26 @@ class Managers extends React.Component {
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {
-                                this.props.details_modal_manager.first_name + " " +
-                                this.props.details_modal_manager.last_name + " - " +
-                                this.props.details_modal_manager.fitness_center.name
+                                this.props.details_modal_manager.is_principal &&
+
+                                <span>
+                                    <Glyphicon glyph="certificate" /> {
+                                        this.props.details_modal_manager.first_name + " " +
+                                        this.props.details_modal_manager.last_name + " - " +
+                                        this.props.details_modal_manager.fitness_center.name
+                                    }
+                                </span>
+                            }
+                            {
+                                !this.props.details_modal_manager.is_principal &&
+
+                                <span>
+                                    {
+                                        this.props.details_modal_manager.first_name + " " +
+                                        this.props.details_modal_manager.last_name + " - " +
+                                        this.props.details_modal_manager.fitness_center.name
+                                    }
+                                </span>
                             }
                         </Modal.Title>
                     </Modal.Header>
@@ -786,6 +823,27 @@ class Managers extends React.Component {
                                     </Col>
                                     <Col xs={3} sm={3} md={3} lg={3}>
                                         {Dates.format(this.props.details_modal_manager.creation_date)}
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.STATUS.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        {
+                                            !this.props.details_modal_manager.is_principal &&
+
+                                                <span>
+                                                    {Texts.SECONDAIRE.text_fr}
+                                                </span>
+                                        }
+                                        {
+                                            this.props.details_modal_manager.is_principal &&
+
+                                            <span>
+                                                <Glyphicon glyph="certificate" /> {Texts.PRINCIPAL.text_fr}
+                                            </span>
+                                        }
                                     </Col>
                                 </FormGroup>
 
@@ -864,7 +922,10 @@ class Managers extends React.Component {
                                                 </span>
                                             </Col>
                                             <Col xs={3} sm={3} md={3} lg={3}>
-                                                {this.props.details_modal_manager.last_update_admin_name}
+                                                {
+                                                    this.props.details_modal_manager.last_update_admin_name +
+                                                    " (" + (this.props.details_modal_manager.last_update_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") "
+                                                }
                                             </Col>
                                         </FormGroup>
                                     )
@@ -908,7 +969,10 @@ class Managers extends React.Component {
                                                 </span>
                                             </Col>
                                             <Col xs={3} sm={3} md={3} lg={3}>
-                                                {this.props.details_modal_manager.validator_admin_name}
+                                                {
+                                                    this.props.details_modal_manager.validator_admin_name +
+                                                    " (" + (this.props.details_modal_manager.validator_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") "
+                                                }
                                             </Col>
                                         </FormGroup>
                                     )
@@ -981,6 +1045,32 @@ class Managers extends React.Component {
                                     </Col>
                                     <Col xs={3} sm={3} md={3} lg={3}>
                                         {this.props.details_modal_manager.fitness_center.zip_code}
+                                    </Col>
+                                </FormGroup>
+
+                                <br/>
+
+                                <FormGroup>
+                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.SIRET.text_fr + " : "}
+                                        </span>
+                                    </Col>
+                                    <br/>
+                                    <Col xs={2} sm={2} md={2} lg={2}>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {this.props.details_modal_manager.fitness_center.siret}
+                                        </span>
+                                    </Col>
+                                    <br/>
+                                    <Col xs={2} sm={2} md={2} lg={2}>
+                                    </Col>
+                                    <Col xs={3} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
+                                        <Button>
+                                            {Texts.CONSULTER.text_fr}
+                                        </Button>
                                     </Col>
                                 </FormGroup>
 

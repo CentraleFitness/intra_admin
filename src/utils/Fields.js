@@ -42,7 +42,8 @@ const Fields = {
     AUTO_GENERATE_UUID: "auto_generate_uuid",
     FITNESS_CENTER_ID: "fitness_center_id",
     MACHINE_TYPE: "machine_type",
-    MODULE_STATE_CODE: "module_state_code"
+    MODULE_STATE_CODE: "module_state_code",
+    SIRET: "siret"
 };
 
 export default Fields;

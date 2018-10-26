@@ -1,4 +1,9 @@
 const Paths = {
+
+    SIRET_API: "https://www.numero-de-siret.com/api",
+
+    SIRET: "/siret",
+
     HOST: "http://localhost:8083",
 
     PASSWORD: "/password",
@@ -9,6 +14,8 @@ const Paths = {
     AUTHENTICATION_TOKEN: "/authenticationtoken",
 
     MANAGER: "/manager",
+
+    CONSULT_SIRET: "/consult_siret",
 
     ACCOUNT: "/account",
 

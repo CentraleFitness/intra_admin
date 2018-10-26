@@ -14,11 +14,24 @@ import "../styles/Menu.css"
 
 class Menu extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            active_key: "home"
+        }
+    }
+
+    handleSelect(key) {
+        this.setState({
+            active_key: key
+        })
+    }
+
     render() {
         return (
             <Col xs={0} sm={0} md={0} lg={0}>
                 <Panel className={"menu"}>
-                    <Nav bsStyle="pills" stacked activeKey={1}>
+                    <Nav bsStyle="pills" stacked activeKey={this.state.active_key} onSelect={this.handleSelect.bind(this)}>
 
                         <LinkContainer to={"/home"}>
                             <NavItem eventKey={"home"}>
