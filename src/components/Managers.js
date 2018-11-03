@@ -33,6 +33,9 @@ import {
     setUndoRefuseManager,
     setFitnessCenters,
 
+    displayConsultSiretModal,
+    dismissConsultSiretModal,
+
     setManagersFilterName,
     setManagersFilterSelectFitnessCenter,
     managersResetFilters,
@@ -62,6 +65,57 @@ class Managers extends React.Component {
         if (this.props.fitness_centers_is_load === false) {
             this.getFitnessCenters();
         }
+    }
+
+    getSiret() {
+        let params = {};
+
+        params[Fields.TOKEN] = localStorage.getItem("token");
+        params[Fields.SIRET] = this.props.details_modal_manager.fitness_center.siret.replace(/\s+/g, '');
+
+        let me = this;
+
+        let communication = new Communication(HttpMethods.GET, Paths.HOST + Paths.CONSULT_SIRET, params);
+        communication.sendRequest(
+            function (response) {
+
+                if (response.status === 200 &&
+                    response.data.code === Status.GENERIC_OK.code) {
+
+                    me.props.displayConsultSiretModal({
+                        info: response.data.info.array_return[0],
+                        siret: me.props.details_modal_manager.fitness_center.siret,
+                        message: (response.data.info.array_return.length === 0 ?
+                            Texts.CE_NUMERO_DE_SIRET_NEST_PAS_VALIDE.text_fr : "")
+                    });
+
+                } else {
+                    let message = "";
+                    for (let key in Status) {
+                        if (Status[key].code === response.data.code) {
+                            message = Status[key].message_fr;
+                            break;
+                        }
+                    }
+
+                    if (me !== undefined) {
+                        me.props.displayAlert({
+                            alertTitle: Texts.ERREUR_TITRE.text_fr,
+                            alertText: message
+                        });
+                    }
+                }
+            },
+            function (error) {
+
+                if (me !== undefined) {
+                    me.props.displayAlert({
+                        alertTitle: Texts.ERREUR_TITRE.text_fr,
+                        alertText: Texts.ERR_RESEAU.text_fr
+                    });
+                }
+            }
+        );
     }
 
     getManagers() {
@@ -606,6 +660,14 @@ class Managers extends React.Component {
         this.props.dismissManagerDetailsModal();
     }
 
+    handleConsultSiretClick() {
+        this.getSiret()
+    }
+
+    handleConsultSiretDismiss() {
+        this.props.dismissConsultSiretModal();
+    }
+
     render() {
 
         return (
@@ -1068,7 +1130,7 @@ class Managers extends React.Component {
                                     <Col xs={2} sm={2} md={2} lg={2}>
                                     </Col>
                                     <Col xs={3} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
-                                        <Button>
+                                        <Button onClick={this.handleConsultSiretClick.bind(this)}>
                                             {Texts.CONSULTER.text_fr}
                                         </Button>
                                     </Col>
@@ -1234,6 +1296,48 @@ class Managers extends React.Component {
                     </Modal.Footer>
                 </Modal>
 
+                <Modal show={this.props.show_consult_siret_modal} onHide={this.handleConsultSiretDismiss.bind(this)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{Texts.CONSULTER_UN_SIRET.text_fr + " : " + this.props.consult_siret_modal_siret}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {
+                            Object.keys(this.props.consult_siret_modal_info).map((key) => (
+
+                                <p key={key} style={
+                                    (
+                                        key === "LIBAPEN" ||
+                                        key === "CATEGORIE" ||
+                                        key === "SIRET" ||
+                                        key === "SIREN" ||
+                                        key === "LIBAPET"
+                                    ) ? {
+                                    color: "red"
+                                } : {}}>
+                                    <span style={{fontWeight: "bold"}}>
+                                        {key + " : "}
+                                    </span>
+                                    {this.props.consult_siret_modal_info[key]}
+                                </p>
+                            ))
+                        }
+                        {
+                            this.props.consult_siret_modal_info.length === 0 &&
+
+                            <FormGroup>
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    {this.props.consult_siret_modal_message}
+                                </Col>
+                            </FormGroup>
+                        }
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.handleConsultSiretDismiss.bind(this)}>
+                            <Glyphicon glyph="remove" /> {Texts.FERMER.text_fr}
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             </Panel>
         );
     }
@@ -1258,6 +1362,11 @@ function mapStateToProps(state) {
         update_confirm_is_validated: state.managers.update_confirm_is_validated,
         update_confirm_is_undo_refuse: state.managers.update_confirm_is_undo_refuse,
 
+        show_consult_siret_modal: state.managers.show_consult_siret_modal,
+        consult_siret_modal_siret: state.managers.consult_siret_modal_siret,
+        consult_siret_modal_info: state.managers.consult_siret_modal_info,
+        consult_siret_modal_message: state.managers.consult_siret_modal_message,
+
         show_details_modal: state.managers.show_details_modal,
         details_modal_manager: state.managers.details_modal_manager,
 
@@ -1276,6 +1385,9 @@ export default connect(mapStateToProps, {
     setValidateManager,
     setUndoRefuseManager,
     setFitnessCenters,
+
+    displayConsultSiretModal,
+    dismissConsultSiretModal,
 
     setManagersFilterName,
     setManagersFilterSelectFitnessCenter,

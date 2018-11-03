@@ -6,6 +6,9 @@ import {
     SET_UNDO_REFUSE_MANAGER,
     SET_FITNESS_CENTERS,
 
+    DISPLAY_CONSULT_SIRET_MODAL,
+    DISMISS_CONSULT_SIRET_MODAL,
+
     SET_MANAGERS_FILTER_NAME,
     SET_MANAGERS_FILTER_SELECT_FITNESS_CENTER,
     MANAGERS_RESET_FILTER,
@@ -48,6 +51,19 @@ export const setUndoRefuseManager = (manager) => {
     return {
         type: SET_UNDO_REFUSE_MANAGER,
         payload: manager
+    };
+};
+
+export const displayConsultSiretModal = (siret) => {
+    return {
+        type: DISPLAY_CONSULT_SIRET_MODAL,
+        payload: siret
+    };
+};
+
+export const dismissConsultSiretModal = () => {
+    return {
+        type: DISMISS_CONSULT_SIRET_MODAL
     };
 };
 

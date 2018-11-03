@@ -832,6 +832,14 @@ const Texts = {
     CONSULTER: {
         text_fr: "Consulter",
         text_en: "Consult"
+    },
+    CONSULTER_UN_SIRET: {
+        text_fr: "Consulter un SIRET",
+        text_en: "Consult a SIRET"
+    },
+    CE_NUMERO_DE_SIRET_NEST_PAS_VALIDE: {
+        text_fr: "Ce numéro de SIRET n'est pas valide.",
+        text_en: "This SIRET number is not valid."
     }
 };
 

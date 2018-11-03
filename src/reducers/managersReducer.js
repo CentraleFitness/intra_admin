@@ -6,6 +6,9 @@ import {
     SET_UNDO_REFUSE_MANAGER,
     SET_FITNESS_CENTERS,
 
+    DISPLAY_CONSULT_SIRET_MODAL,
+    DISMISS_CONSULT_SIRET_MODAL,
+
     SET_MANAGERS_FILTER_NAME,
     SET_MANAGERS_FILTER_SELECT_FITNESS_CENTER,
     MANAGERS_RESET_FILTER,
@@ -33,6 +36,11 @@ const initialState = {
     update_confirm_is_active: false,
     update_confirm_is_validated: false,
     update_confirm_is_undo_refuse: false,
+
+    show_consult_siret_modal: false,
+    consult_siret_modal_info: [],
+    consult_siret_modal_message: "",
+    consult_siret_modal_siret: "",
 
     show_details_modal: false,
     details_modal_manager: {
@@ -148,6 +156,23 @@ export default (state = initialState, action) => {
                 ...state,
                 initial_managers: tmp_manager_validation_undo_refuse,
                 managers: tmp_manager_validation_undo_refuse
+            };
+
+        case DISPLAY_CONSULT_SIRET_MODAL:
+            return {
+                ...state,
+                show_consult_siret_modal: true,
+                consult_siret_modal_info: action.payload.info,
+                consult_siret_modal_siret: action.payload.siret,
+                consult_siret_modal_message: action.payload.message
+            };
+        case DISMISS_CONSULT_SIRET_MODAL:
+            return {
+                ...state,
+                show_consult_siret_modal: false,
+                consult_siret_modal_info: [],
+                consult_siret_modal_siret: "",
+                consult_siret_modal_message: ""
             };
         case SET_FITNESS_CENTERS:
             return {
