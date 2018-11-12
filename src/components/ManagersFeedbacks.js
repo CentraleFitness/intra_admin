@@ -115,6 +115,10 @@ class ManagersFeedbacks extends React.Component {
         return {backgroundColor: "white"};
     }
 
+    setCursor(){
+        return {cursor: "pointer"};
+    }
+
     render() {
         return (
             <div>
@@ -132,7 +136,7 @@ class ManagersFeedbacks extends React.Component {
 
                     {
                         this.props.managers_feedbacks.map((item, index) => (
-                            <tr onClick={this.handleFeedbackClick.bind(this, item)}>
+                            <tr style={this.setCursor()} onClick={this.handleFeedbackClick.bind(this, item)}>
                                 <td>{item.title}</td>
                                 <td>{item.fitness_manager_name}</td>
                                 <td>{item.fitness_center.name + " (" + item.fitness_center.zip_code + ", " + item.fitness_center.city + ")"}</td>

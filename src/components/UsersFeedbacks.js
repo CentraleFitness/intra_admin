@@ -14,6 +14,8 @@ import {
 } from "../actions/globalActions";
 
 import {
+    dismissFeedback,
+    displayFeedback,
     setUsersFeedbacks
 } from "../actions/feedbacksActions";
 
@@ -94,11 +96,11 @@ class UsersFeedbacks extends React.Component {
     }
 
     handleFeedbackDismiss() {
-       // this.props.dismissFeedback();
+        this.props.dismissFeedback();
     }
 
     handleFeedbackClick(item) {
-        // this.props.displayFeedback(item);
+        this.props.displayFeedback(item);
     }
 
     setColor(feedback_state) {
@@ -114,6 +116,10 @@ class UsersFeedbacks extends React.Component {
         return {backgroundColor: "white"};
     }
 
+    setCursor() {
+        return {cursor: "pointer"};
+    }
+
     render() {
         return (
             <div>
@@ -121,7 +127,7 @@ class UsersFeedbacks extends React.Component {
                     <thead>
                     <tr>
                         <th>Sujet</th>
-                        <th>Nom du gérant</th>
+                        <th>Nom de l'utilisateur</th>
                         <th>Nom de la salle</th>
                         <th>Etat du ticket</th>
                         <th>°</th>
@@ -131,12 +137,12 @@ class UsersFeedbacks extends React.Component {
 
                     {
                         this.props.users_feedbacks.map((item, index) => (
-                            <tr onClick={this.handleFeedbackClick.bind(this, item)}>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
+                            <tr style={this.setCursor()} onClick={this.handleFeedbackClick.bind(this, item)}>
+                                <td>{item._id}</td>
+                                <td>{item.email}</td>
+                                <td>{item.email}</td>
+                                <td>{item.email}</td>
+                                <td style={this.setColor(1)}></td>
                             </tr>
                         ))
                     }
@@ -146,11 +152,11 @@ class UsersFeedbacks extends React.Component {
 
                 <Modal show={this.props.showFeedback} bsSize={"medium"} onHide={this.handleFeedbackDismiss.bind(this)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>{this.props.currentFeedback.title}</Modal.Title>
+                        <Modal.Title>{this.props.currentFeedback.email}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <FormControl.Static>
-                            {this.props.currentFeedback.description}
+                            {this.props.currentFeedback.content}
                         </FormControl.Static>
                     </Modal.Body>
                     <Modal.Footer>
@@ -176,5 +182,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     displayAlert,
     setUsersFeedbacksIsLoad,
-    setUsersFeedbacks
+    setUsersFeedbacks,
+    displayFeedback,
+    dismissFeedback
 })(UsersFeedbacks);

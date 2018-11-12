@@ -53,7 +53,7 @@ class Feedbacks extends React.Component {
 
     handleSelect(key) {
         this.setState({
-            key : key
+            key: key
         });
     }
 
@@ -71,9 +71,7 @@ class Feedbacks extends React.Component {
                         <ManagersFeedbacks/>
                     </Tab.Pane>
                     <Tab.Pane eventKey={"Users"} title="Users">
-                        {
-                            // <UsersFeedbacks/>
-                        }
+                        <UsersFeedbacks/>
                     </Tab.Pane>
                 </Tabs>
 

@@ -8,7 +8,12 @@ import {
 const initialState = {
     users_feedbacks: [
         {
-
+            "_id": "test",
+            "email": "test@test.com",
+            "content": "This is the content of our description",
+            "date": "Sun Nov 11 19:00:00 GMT 2018",
+            "version": "1.1.0BETA",
+            "__v": 0
         }
     ],
 
