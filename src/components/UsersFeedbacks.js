@@ -43,7 +43,7 @@ class UsersFeedbacks extends React.Component {
 
         let me = this;
 
-        let communication = new Communication(HttpMethods.GET, Paths.HOST + Paths.MANAGER_FEEDBACK, params);
+        let communication = new Communication(HttpMethods.GET, Paths.HOST + Paths.MOBILE_FEEDBACK, params);
         communication.sendRequest(
             function (response) {
                 if (response.status === 200) {
@@ -126,11 +126,10 @@ class UsersFeedbacks extends React.Component {
                 <Table striped bordered condensed hover>
                     <thead>
                     <tr>
-                        <th>Sujet</th>
                         <th>Nom de l'utilisateur</th>
+                        <th>Login de l'utilisateur</th>
+                        <th>Email de l'utilisateur</th>
                         <th>Nom de la salle</th>
-                        <th>Etat du ticket</th>
-                        <th>°</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -138,21 +137,19 @@ class UsersFeedbacks extends React.Component {
                     {
                         this.props.users_feedbacks.map((item, index) => (
                             <tr style={this.setCursor()} onClick={this.handleFeedbackClick.bind(this, item)}>
-                                <td>{item._id}</td>
+                                <td>{item.user.first_name + " " + item.user.last_name}</td>
+                                <td>{item.user.login}</td>
                                 <td>{item.email}</td>
-                                <td>{item.email}</td>
-                                <td>{item.email}</td>
-                                <td style={this.setColor(1)}></td>
+                                <td>{item.fitness_center.name + " (" + item.fitness_center.zip_code + ", " + item.fitness_center.city + ")"}</td>
                             </tr>
                         ))
                     }
-
                     </tbody>
                 </Table>
 
                 <Modal show={this.props.showFeedback} bsSize={"medium"} onHide={this.handleFeedbackDismiss.bind(this)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>{this.props.currentFeedback.email}</Modal.Title>
+                        <Modal.Title>{"Contenu du Feedback client"}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <FormControl.Static>

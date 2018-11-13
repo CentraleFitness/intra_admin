@@ -27,6 +27,8 @@ const Paths = {
 
     MANAGER_FEEDBACK: "/manager_feedback",
 
+    MOBILE_FEEDBACK: "/mobile_feedback",
+
     MODULE: "/module",
 
     MODULE_STATE: "/module_state",
