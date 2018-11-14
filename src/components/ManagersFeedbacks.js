@@ -99,7 +99,10 @@ class ManagersFeedbacks extends React.Component {
     }
 
     handleFeedbackClick(item) {
-        this.props.displayFeedback(item);
+        this.props.displayFeedback({
+            isManager: true,
+            feedback: item
+        });
     }
 
     setColor(feedback_state) {
@@ -149,20 +152,26 @@ class ManagersFeedbacks extends React.Component {
                     </tbody>
                 </Table>
 
-                <Modal show={this.props.showFeedback} bsSize={"medium"} onHide={this.handleFeedbackDismiss.bind(this)}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>{this.props.currentFeedback.title}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <FormControl.Static>
-                            {this.props.currentFeedback.description}
-                        </FormControl.Static>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.handleFeedbackDismiss.bind(this)}><Glyphicon
-                            glyph="remove"/> {Texts.FERMER.text_fr}</Button>
-                    </Modal.Footer>
-                </Modal>
+                {
+                    this.props.showManagerFeedback === true &&
+
+
+                    <Modal show={this.props.showManagerFeedback} bsSize={"medium"}
+                           onHide={this.handleFeedbackDismiss.bind(this)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>{this.props.currentFeedback.title}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <FormControl.Static>
+                                {this.props.currentFeedback.description}
+                            </FormControl.Static>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.handleFeedbackDismiss.bind(this)}><Glyphicon
+                                glyph="remove"/> {Texts.FERMER.text_fr}</Button>
+                        </Modal.Footer>
+                    </Modal>
+                }
 
             </div>
         );
@@ -176,7 +185,7 @@ function mapStateToProps(state) {
         managers_feedbacks_is_load: state.global.managers_feedbacks_is_load,
 
         managers_feedbacks: state.feedbacks.managers_feedbacks,
-        showFeedback: state.feedbacks.showFeedback,
+        showManagerFeedback: state.feedbacks.showManagerFeedback,
         currentFeedback: state.feedbacks.currentFeedback
     };
 }

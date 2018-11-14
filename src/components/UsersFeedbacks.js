@@ -100,20 +100,10 @@ class UsersFeedbacks extends React.Component {
     }
 
     handleFeedbackClick(item) {
-        this.props.displayFeedback(item);
-    }
-
-    setColor(feedback_state) {
-        if (feedback_state === 1) {
-            return {backgroundColor: "orange"};
-        }
-        else if (feedback_state === 2) {
-            return {backgroundColor: "red"};
-        }
-        else if (feedback_state === 3) {
-            return {backgroundColor: "green"};
-        }
-        return {backgroundColor: "white"};
+        this.props.displayFeedback({
+            isManager: false,
+            feedback: item
+        });
     }
 
     setCursor() {
@@ -130,6 +120,7 @@ class UsersFeedbacks extends React.Component {
                         <th>Login de l'utilisateur</th>
                         <th>Email de l'utilisateur</th>
                         <th>Nom de la salle</th>
+                        <th>Version de l'application</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -141,26 +132,33 @@ class UsersFeedbacks extends React.Component {
                                 <td>{item.user.login}</td>
                                 <td>{item.email}</td>
                                 <td>{item.fitness_center.name + " (" + item.fitness_center.zip_code + ", " + item.fitness_center.city + ")"}</td>
+                                <td>{item.version}</td>
                             </tr>
                         ))
                     }
                     </tbody>
                 </Table>
 
-                <Modal show={this.props.showFeedback} bsSize={"medium"} onHide={this.handleFeedbackDismiss.bind(this)}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>{"Contenu du Feedback client"}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <FormControl.Static>
-                            {this.props.currentFeedback.content}
-                        </FormControl.Static>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.handleFeedbackDismiss.bind(this)}><Glyphicon
-                            glyph="remove"/> {Texts.FERMER.text_fr}</Button>
-                    </Modal.Footer>
-                </Modal>
+                {
+                    this.props.showUserFeedback === true &&
+
+
+                    <Modal show={this.props.showUserFeedback} bsSize={"medium"}
+                           onHide={this.handleFeedbackDismiss.bind(this)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>{"Feedback utilisateur: " + this.props.currentFeedback.user.login}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <FormControl.Static>
+                                {this.props.currentFeedback.content}
+                            </FormControl.Static>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.handleFeedbackDismiss.bind(this)}><Glyphicon
+                                glyph="remove"/> {Texts.FERMER.text_fr}</Button>
+                        </Modal.Footer>
+                    </Modal>
+                }
             </div>
         );
     }
@@ -171,7 +169,7 @@ function mapStateToProps(state) {
         users_feedbacks_is_load: state.global.users_feedbacks_is_load,
 
         users_feedbacks: state.feedbacks.users_feedbacks,
-        showFeedback: state.feedbacks.showFeedback,
+        showUserFeedback: state.feedbacks.showUserFeedback,
         currentFeedback: state.feedbacks.currentFeedback
     };
 }
