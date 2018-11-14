@@ -32,7 +32,7 @@ class UsersFeedbacks extends React.Component {
 
     componentWillMount() {
         if (this.props.users_feedbacks_is_load === false) {
-            // this.getUserFeedbacks();
+            this.getUserFeedbacks();
         }
     }
 
@@ -49,9 +49,7 @@ class UsersFeedbacks extends React.Component {
                 if (response.status === 200) {
                     if (response.data.code === Status.GENERIC_OK.code) {
                         if (me !== undefined) {
-                            console.log(response.data.feedbacks);
                             me.props.setUsersFeedbacks(response.data.feedbacks);
-                            // Si déjà chargé et donc ne pas faire les requetes à nouveau
                             me.props.setUsersFeedbacksIsLoad();
                         }
 

@@ -6,26 +6,7 @@ import {
 } from "../actions/types"
 
 const initialState = {
-    users_feedbacks: [
-        {
-            _id: "test",
-            email: "test@test.com",
-            fitness_center: {
-                name: "Keep Cool",
-                zip_code: "75000",
-                city: "Paris"
-            },
-            user: {
-                first_name: "Julien",
-                last_name: "LE FADA",
-                login: "Eljuju13"
-            },
-            content: "This is the content of our description",
-            date: "Sun Nov 11 19:00:00 GMT 2018",
-            version: "1.1.0BETA",
-            __v: 0
-        }
-    ],
+    users_feedbacks: [],
 
     managers_feedbacks: [],
     currentFeedback: {
