@@ -4,7 +4,7 @@ const Paths = {
 
     SIRET: "/siret",
 
-    HOST: "http://localhost:8083",
+    HOST: "http://91.121.155.83:8083",
 
     PASSWORD: "/password",
 
