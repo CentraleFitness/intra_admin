@@ -746,7 +746,7 @@ class Managers extends React.Component {
                                 </td>
                                 <td style={{verticalAlign: "middle"}}>{item.first_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.last_name}</td>
-                                <td style={{verticalAlign: "middle"}}>{item.fitness_center.name}</td>
+                                <td style={{verticalAlign: "middle"}}>{item.fitness_center.name + " (" + item.fitness_center.city + ")"}</td>
                                 <td style={{verticalAlign: "middle"}}>
                                     {
                                         item.is_principal === true &&
