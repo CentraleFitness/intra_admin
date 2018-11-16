@@ -726,7 +726,7 @@ class Managers extends React.Component {
                             <th></th>
                             <th>{Texts.PRENOM.text_fr}</th>
                             <th>{Texts.NOM.text_fr}</th>
-                            <th>{Texts.EMAIL.text_fr}</th>
+                            <th>{Texts.SALLE_SPORT.text_fr}</th>
                             <th>{Texts.STATUS.text_fr}</th>
                             <th>{Texts.DATE_DE_CREATION.text_fr}</th>
                             <th style={{textAlign: "center"}}>{Texts.VALIDATION.text_fr}</th>
@@ -746,7 +746,7 @@ class Managers extends React.Component {
                                 </td>
                                 <td style={{verticalAlign: "middle"}}>{item.first_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.last_name}</td>
-                                <td style={{verticalAlign: "middle"}}>{item.email_address}</td>
+                                <td style={{verticalAlign: "middle"}}>{item.fitness_center.name}</td>
                                 <td style={{verticalAlign: "middle"}}>
                                     {
                                         item.is_principal === true &&
