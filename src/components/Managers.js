@@ -679,10 +679,10 @@ class Managers extends React.Component {
                             <Col xs={12} sm={12} md={6} lg={6}>
 
                                 <FormGroup>
-                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                    <Col componentClass={ControlLabel} xs={12} sm={12} md={3} lg={3}>
                                         {Texts.PAR_NOM.text_fr}
                                     </Col>
-                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                    <Col xs={12} sm={12} md={9} lg={9}>
                                         <FormControl
                                             type="text"
                                             placeholder={Texts.NOM.text_fr}
@@ -695,11 +695,11 @@ class Managers extends React.Component {
                             </Col>
                             <Col xs={12} sm={12} md={6} lg={6}>
                                 <FormGroup>
-                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                    <Col componentClass={ControlLabel} xs={12} sm={12} md={3} lg={3}>
                                         {Texts.PAR_SALLE.text_fr}
                                     </Col>
 
-                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                    <Col xs={12} sm={12} md={9} lg={9}>
                                         <Select
                                             clearable={false}
                                             value={this.props.filter_select_fitness_center}
@@ -878,20 +878,20 @@ class Managers extends React.Component {
                             <Form horizontal>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.DATE_DE_CREATION.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {Dates.format(this.props.details_modal_manager.creation_date)}
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.STATUS.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {
                                             !this.props.details_modal_manager.is_principal &&
 
@@ -910,39 +910,39 @@ class Managers extends React.Component {
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.PRENOM.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.first_name}
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.NOM.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.last_name}
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.EMAIL.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.email_address}
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.TELEPHONE.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.phone_number}
                                     </Col>
                                 </FormGroup>
@@ -954,7 +954,7 @@ class Managers extends React.Component {
 
                                     (
                                         <FormGroup>
-                                            <Col xs={2} sm={2} md={2} lg={2}>
+                                            <Col xs={12} sm={12} md={2} lg={2}>
                                                 {
                                                     this.props.details_modal_manager.is_active === true &&
                                                     (
@@ -972,18 +972,18 @@ class Managers extends React.Component {
                                                     )
                                                 }
                                             </Col>
-                                            <Col xs={1} sm={1} md={1} lg={1}>
+                                            <Col xs={12} sm={12} md={1} lg={1}>
                                                 {Texts.DEPUIS.text_fr}
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 {Dates.format(this.props.details_modal_manager.last_update_activity)}
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 <span style={{fontWeight: "bold"}}>
                                                     {Texts.ACTION_EFFECTUEE_PAR.text_fr + " :"}
                                                 </span>
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 {
                                                     this.props.details_modal_manager.last_update_admin_name +
                                                     " (" + (this.props.details_modal_manager.last_update_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") "
@@ -1001,7 +1001,7 @@ class Managers extends React.Component {
                                         &&
                                     (
                                         <FormGroup>
-                                            <Col xs={2} sm={2} md={2} lg={2}>
+                                            <Col xs={12} sm={12} md={2} lg={2}>
                                                 {
                                                     this.props.details_modal_manager.is_validated === true &&
                                                     (
@@ -1019,18 +1019,18 @@ class Managers extends React.Component {
                                                     )
                                                 }
                                             </Col>
-                                            <Col xs={1} sm={1} md={1} lg={1}>
+                                            <Col xs={12} sm={12} md={1} lg={1}>
                                                 {Texts.DEPUIS.text_fr}
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 {Dates.format(this.props.details_modal_manager.validation_date)}
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 <span style={{fontWeight: "bold"}}>
                                                     {Texts.ACTION_EFFECTUEE_PAR.text_fr + " :"}
                                                 </span>
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 {
                                                     this.props.details_modal_manager.validator_admin_name +
                                                     " (" + (this.props.details_modal_manager.validator_admin_is_manager ? Texts.GERANT.text_fr : Texts.ADMIN.text_fr) + ") "
@@ -1046,50 +1046,50 @@ class Managers extends React.Component {
                             <Form horizontal>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.DATE_DE_CREATION.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {Dates.format(this.props.details_modal_manager.fitness_center.creation_date)}
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.NOM.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.fitness_center.name}
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.ADRESSE.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.fitness_center.address}
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.VILLE.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.fitness_center.city}
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.ADRESSE_COMPLEMENT.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {
                                             (
                                                 (this.props.details_modal_manager.fitness_center.address_second === "" ||
@@ -1100,12 +1100,12 @@ class Managers extends React.Component {
 
                                         }
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.CODE_POSTAL.text_fr + " : "}
                                         </span>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         {this.props.details_modal_manager.fitness_center.zip_code}
                                     </Col>
                                 </FormGroup>
@@ -1113,23 +1113,23 @@ class Managers extends React.Component {
                                 <br/>
 
                                 <FormGroup>
-                                    <Col xs={3} sm={3} md={3} lg={3}>
+                                    <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.SIRET.text_fr + " : "}
                                         </span>
                                     </Col>
                                     <br/>
-                                    <Col xs={2} sm={2} md={2} lg={2}>
+                                    <Col xs={0} sm={0} md={2} lg={2}>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
+                                    <Col xs={12} sm={12} md={3} lg={3} style={{textAlign: "center"}}>
                                         <span style={{fontWeight: "bold"}}>
                                             {this.props.details_modal_manager.fitness_center.siret}
                                         </span>
                                     </Col>
                                     <br/>
-                                    <Col xs={2} sm={2} md={2} lg={2}>
+                                    <Col xs={0} sm={0} md={2} lg={2}>
                                     </Col>
-                                    <Col xs={3} sm={3} md={3} lg={3} style={{textAlign: "center"}}>
+                                    <Col xs={12} sm={12} md={3} lg={3} style={{textAlign: "center"}}>
                                         <Button onClick={this.handleConsultSiretClick.bind(this)}>
                                             {Texts.CONSULTER.text_fr}
                                         </Button>
@@ -1158,11 +1158,10 @@ class Managers extends React.Component {
                                 <h3 style={{textAlign: "center"}}>
                                     {Texts.VALIDATION.text_fr}
                                 </h3>
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={0} sm={0} md={4} lg={4}>
                                 </Col>
-                                <Col xs={1} sm={1} md={1} lg={1}>
+                                <Col xs={12} sm={12} md={1} lg={1}>
                                     <Button
-                                        className={"pull-left"}
                                         bsStyle={"success"}
                                         onClick={this.validateClick.bind(this, this.props.details_modal_manager)}
                                     >
@@ -1171,11 +1170,10 @@ class Managers extends React.Component {
                                         {Texts.VALIDER.text_fr}
                                     </Button>
                                 </Col>
-                                <Col xs={2} sm={2} md={2} lg={2}>
+                                <Col xs={0} sm={0} md={2} lg={2}>
                                 </Col>
-                                <Col xs={1} sm={1} md={1} lg={1}>
+                                <Col xs={12} sm={12} md={1} lg={1}>
                                     <Button
-                                        className={"pull-right"}
                                         bsStyle={"danger"}
                                         onClick={this.refuseClick.bind(this, this.props.details_modal_manager)}
                                     >
@@ -1184,7 +1182,7 @@ class Managers extends React.Component {
                                         {Texts.REFUSER.text_fr}
                                     </Button>
                                 </Col>
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={0} sm={0} md={4} lg={4}>
                                 </Col>
                             </Panel>
                         }
@@ -1197,10 +1195,10 @@ class Managers extends React.Component {
                                 <h3 style={{textAlign: "center"}}>
                                     {Texts.ACTIVITE.text_fr}
                                 </h3>
-                                <Col xs={5} sm={5} md={5} lg={5}>
+                                <Col xs={0} sm={0} md={5} lg={5}>
                                 </Col>
 
-                                <Col xs={1} sm={1} md={1} lg={1}>
+                                <Col xs={12} sm={12} md={1} lg={1}>
                                     {
                                         this.props.details_modal_manager.is_validated === true &&
                                         this.props.details_modal_manager.is_active === false &&
@@ -1225,7 +1223,7 @@ class Managers extends React.Component {
                                     }
                                 </Col>
 
-                                <Col xs={5} sm={5} md={5} lg={5}>
+                                <Col xs={0} sm={0} md={5} lg={5}>
                                 </Col>
                             </Panel>
                         }
@@ -1238,10 +1236,10 @@ class Managers extends React.Component {
                                 <h3 style={{textAlign: "center"}}>
                                     {Texts.VALIDATION.text_fr}
                                 </h3>
-                                <Col xs={5} sm={5} md={5} lg={5}>
+                                <Col xs={12} sm={12} md={5} lg={5}>
                                 </Col>
 
-                                <Col xs={1} sm={1} md={1} lg={1}>
+                                <Col xs={12} sm={12} md={1} lg={1}>
 
                                     <Button onClick={this.undoRefuseClick.bind(this, this.props.details_modal_manager)}>
                                         <span style={{color: "red"}}>
@@ -1252,7 +1250,7 @@ class Managers extends React.Component {
 
                                 </Col>
 
-                                <Col xs={5} sm={5} md={5} lg={5}>
+                                <Col xs={0} sm={0} md={5} lg={5}>
                                 </Col>
                             </Panel>
                         }

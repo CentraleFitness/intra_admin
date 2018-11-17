@@ -483,10 +483,10 @@ class Administrators extends React.Component {
                             <Col xs={12} sm={12} md={6} lg={6}>
 
                                 <FormGroup>
-                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                    <Col componentClass={ControlLabel} xs={12} sm={12} md={3} lg={3}>
                                         {Texts.PAR_NOM.text_fr}
                                     </Col>
-                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                    <Col xs={12} sm={12} md={9} lg={9}>
                                         <FormControl
                                             type="text"
                                             placeholder={Texts.NOM.text_fr}
@@ -585,12 +585,12 @@ class Administrators extends React.Component {
                                 this.props.edit_modal_admininistrator._id !== "" &&
 
                                 <FormGroup>
-                                    <Col xs={4} sm={4} md={4} lg={4}>
-                                    <span style={{fontWeight: "bold"}}>
-                                        {Texts.DATE_DE_CREATION.text_fr + " : "}
-                                    </span>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.DATE_DE_CREATION.text_fr + " : "}
+                                        </span>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         {Dates.format(this.props.edit_modal_admininistrator.creation_date)}
                                     </Col>
 
@@ -601,12 +601,12 @@ class Administrators extends React.Component {
                                 this.props.edit_modal_admininistrator._id !== "" &&
 
                                 <FormGroup>
-                                    <Col xs={4} sm={4} md={4} lg={4}>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
                                     <span style={{fontWeight: "bold"}}>
                                         {Texts.DERNIERE_MODIFICATION.text_fr + " : "}
                                     </span>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         {Dates.format(this.props.edit_modal_admininistrator.update_date)}
                                     </Col>
                                 </FormGroup>
@@ -615,12 +615,12 @@ class Administrators extends React.Component {
                             <br/>
 
                             <FormGroup validationState={this.getValidationState('first_name')}>
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.PRENOM.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <FormControl
                                         type="text"
                                         placeholder={Texts.PRENOM.text_fr}
@@ -633,12 +633,12 @@ class Administrators extends React.Component {
 
                             <FormGroup validationState={this.getValidationState('last_name')}>
 
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.NOM.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <FormControl
                                         type="text"
                                         placeholder={Texts.NOM.text_fr}
@@ -651,12 +651,12 @@ class Administrators extends React.Component {
 
                             <FormGroup validationState={this.getValidationState('email_address')}>
 
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.EMAIL.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <FormControl
                                         readOnly={this.props.edit_modal_admininistrator._id !== ""}
                                         type="text"
@@ -670,12 +670,12 @@ class Administrators extends React.Component {
 
                             <FormGroup validationState={this.getValidationState('phone_number')}>
 
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.TELEPHONE.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <FormControl
                                         type="text"
                                         placeholder={Texts.TELEPHONE.text_fr}
@@ -690,12 +690,12 @@ class Administrators extends React.Component {
 
                                 <FormGroup validationState={this.getValidationState('password')}>
 
-                                    <Col xs={4} sm={4} md={4} lg={4}>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
                                         <ControlLabel>
                                             {Texts.MDP.text_fr + " : "}
                                         </ControlLabel>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         <FormControl
                                             type="password"
                                             placeholder={Texts.MDP.text_fr}
@@ -714,12 +714,12 @@ class Administrators extends React.Component {
 
                                 <FormGroup validationState={this.getValidationState('confirm_password')}>
 
-                                    <Col xs={4} sm={4} md={4} lg={4}>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
                                         <ControlLabel>
                                             {Texts.CONFIRM_MDP.text_fr + " : "}
                                         </ControlLabel>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         <FormControl
                                             type="password"
                                             placeholder={Texts.CONFIRM_MDP.text_fr}

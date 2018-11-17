@@ -570,10 +570,10 @@ class Modules extends React.Component {
                             <Col xs={12} sm={12} md={6} lg={6}>
 
                                 <FormGroup>
-                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                    <Col componentClass={ControlLabel} xs={12} sm={12} md={3} lg={3}>
                                         {Texts.PAR_UUID.text_fr}
                                     </Col>
-                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                    <Col xs={12} sm={12} md={9} lg={9}>
                                         <FormControl
                                             type="text"
                                             placeholder={Texts.UUID.text_fr}
@@ -586,11 +586,11 @@ class Modules extends React.Component {
                             </Col>
                             <Col xs={12} sm={12} md={6} lg={6}>
                                 <FormGroup>
-                                    <Col componentClass={ControlLabel} xs={3} sm={3} md={3} lg={3}>
+                                    <Col componentClass={ControlLabel} xs={12} sm={12} md={3} lg={3}>
                                         {Texts.PAR_SALLE.text_fr}
                                     </Col>
 
-                                    <Col xs={9} sm={9} md={9} lg={9}>
+                                    <Col xs={12} sm={12} md={9} lg={9}>
                                         <Select
                                             clearable={false}
                                             value={this.props.filter_select_fitness_center}
@@ -678,12 +678,12 @@ class Modules extends React.Component {
                                 this.props.edit_modal_module._id !== "" &&
 
                                 <FormGroup>
-                                    <Col xs={4} sm={4} md={4} lg={4}>
-                                    <span style={{fontWeight: "bold"}}>
-                                        {Texts.DATE_DE_CREATION.text_fr + " : "}
-                                    </span>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.DATE_DE_CREATION.text_fr + " : "}
+                                        </span>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         {Dates.format(this.props.edit_modal_module.creation_date)}
                                     </Col>
 
@@ -694,12 +694,12 @@ class Modules extends React.Component {
                                 this.props.edit_modal_module._id !== "" &&
 
                                 <FormGroup>
-                                    <Col xs={4} sm={4} md={4} lg={4}>
-                                    <span style={{fontWeight: "bold"}}>
-                                        {Texts.DERNIERE_MODIFICATION.text_fr + " : "}
-                                    </span>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
+                                        <span style={{fontWeight: "bold"}}>
+                                            {Texts.DERNIERE_MODIFICATION.text_fr + " : "}
+                                        </span>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         {Dates.format(this.props.edit_modal_module.update_date)}
                                     </Col>
                                 </FormGroup>
@@ -711,12 +711,12 @@ class Modules extends React.Component {
                                 this.props.edit_modal_module._id !== "" &&
 
                                 <FormGroup validationState={"success"}>
-                                    <Col xs={4} sm={4} md={4} lg={4}>
+                                    <Col xs={12} sm={12} md={4} lg={4}>
                                         <ControlLabel>
                                             {Texts.UUID.text_fr + " : "}
                                         </ControlLabel>
                                     </Col>
-                                    <Col xs={8} sm={8} md={8} lg={8}>
+                                    <Col xs={12} sm={12} md={8} lg={8}>
                                         <FormControl
                                             readOnly
                                             type="text"
@@ -747,14 +747,14 @@ class Modules extends React.Component {
                                         this.props.edit_modal_module.auto_generate_uuid === false &&
 
                                         <FormGroup>
-                                            <Col xs={1} sm={1} md={1} lg={1}>
+                                            <Col xs={0} sm={0} md={1} lg={1}>
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={3}>
+                                            <Col xs={12} sm={12} md={3} lg={3}>
                                                 <ControlLabel>
                                                     {Texts.UUID.text_fr + " : "}
                                                 </ControlLabel>
                                             </Col>
-                                            <Col xs={7} sm={7} md={7} lg={7}>
+                                            <Col xs={12} sm={12} md={7} lg={7}>
                                                 <FormControl
                                                     type="text"
                                                     placeholder={Texts.UUID.text_fr}
@@ -762,7 +762,7 @@ class Modules extends React.Component {
                                                     onChange={this.handleUuidChange.bind(this)}/>
                                                 <HelpBlock>{Texts.REGLE_UUID.text_fr}</HelpBlock>
                                             </Col>
-                                            <Col xs={1} sm={1} md={1} lg={1}>
+                                            <Col xs={0} sm={0} md={1} lg={1}>
                                             </Col>
                                         </FormGroup>
                                     }
@@ -772,12 +772,12 @@ class Modules extends React.Component {
 
                             <FormGroup validationState={this.getValidationState('fitness_center')}>
 
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.SALLE_SPORT.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <Select
                                         clearable={false}
                                         value={this.props.edit_modal_module.fitness_center_id}
@@ -790,12 +790,12 @@ class Modules extends React.Component {
 
                             <FormGroup validationState={this.getValidationState('machine_type')}>
 
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.TYPE_DE_MACHINE.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <FormControl
                                         type="text"
                                         placeholder={Texts.TYPE_DE_MACHINE.text_fr}
@@ -807,12 +807,12 @@ class Modules extends React.Component {
 
                             <FormGroup validationState={this.getValidationState('module_state')}>
 
-                                <Col xs={4} sm={4} md={4} lg={4}>
+                                <Col xs={12} sm={12} md={4} lg={4}>
                                     <ControlLabel>
                                         {Texts.ETAT_DU_MODULE.text_fr + " : "}
                                     </ControlLabel>
                                 </Col>
-                                <Col xs={8} sm={8} md={8} lg={8}>
+                                <Col xs={12} sm={12} md={8} lg={8}>
                                     <Select
                                         clearable={false}
                                         value={this.props.edit_modal_module.module_state_id}
