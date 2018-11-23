@@ -15,6 +15,8 @@ const Paths = {
 
     MANAGER: "/manager",
 
+    USER: "/user",
+
     CONSULT_SIRET: "/consult_siret",
 
     ACCOUNT: "/account",
