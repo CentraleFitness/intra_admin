@@ -208,10 +208,10 @@ class Users extends React.Component {
     }
 
     getNameBool(value, item) {
-        return ((item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
-            (item.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
-            (item.login.toLowerCase().search(value.toLowerCase()) !== -1) ||
-            (item.email_address.toLowerCase().search(value.toLowerCase()) !== -1));
+        return ((item.first_name === undefined || item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+            (item.last_name === undefined || item.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+            (item.login === undefined || item.login.toLowerCase().search(value.toLowerCase()) !== -1) ||
+            (item.email_address === undefined || item.email_address.toLowerCase().search(value.toLowerCase()) !== -1));
     }
 
     getFitnessCenterBool(value_select, item) {
