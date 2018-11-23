@@ -6,6 +6,7 @@ import {
     SET_USERS_FEEDBACKS_IS_LOAD,
     SET_MANAGERS_FEEDBACKS_IS_LOAD,
     SET_MANAGERS_IS_LOAD,
+    SET_USERS_IS_LOAD,
     SET_FITNESS_CENTERS_IS_LOAD,
     SET_MODULES_IS_LOAD,
     SET_MODULE_STATES_IS_LOAD,
@@ -14,6 +15,7 @@ import {
     SET_USERS_FEEDBACKS_IS_NOT_LOAD,
     SET_MANAGERS_FEEDBACKS_IS_NOT_LOAD,
     SET_MANAGERS_IS_NOT_LOAD,
+    SET_USERS_IS_NOT_LOAD,
     SET_FITNESS_CENTERS_IS_NOT_LOAD,
     SET_MODULES_IS_NOT_LOAD,
     SET_MODULE_STATES_IS_NOT_LOAD
@@ -56,6 +58,13 @@ export const setManagersIsLoad = () => {
         type: SET_MANAGERS_IS_LOAD
     };
 };
+
+export const setUsersIsLoad = () => {
+    return {
+        type: SET_USERS_IS_LOAD
+    };
+};
+
 
 export const setFitnessCentersIsLoad = () => {
     return {
@@ -100,6 +109,12 @@ export const setManagersFeedbacksIsNotLoad = () => {
 export const setManagersIsNotLoad = () => {
     return {
         type: SET_MANAGERS_IS_NOT_LOAD
+    };
+};
+
+export const setUsersIsNotLoad = () => {
+    return {
+        type: SET_USERS_IS_NOT_LOAD
     };
 };
 

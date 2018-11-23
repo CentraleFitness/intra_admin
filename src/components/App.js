@@ -2,7 +2,7 @@ import React from 'react';
 import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
 
 import Login from './Login';
-import Home from './Home';
+import Users from './Users';
 import Managers from './Managers';
 import Dashboard from './Dashboard';
 import EnsureLoggedInContainer from './EnsureLoggedInContainer';
@@ -19,8 +19,8 @@ class App extends React.Component {
               <Route path={"/auth"} component={Login}/>
               <Route component={EnsureLoggedInContainer}>
                 <Route path={"/"} component={Dashboard}>
-                  <IndexRedirect to="/home" />
-                  <Route path={"home"} component={Home}/>
+                  <IndexRedirect to="/users" />
+                  <Route path={"users"} component={Users}/>
                   <Route path={"managers"} component={Managers}/>
                   <Route path={"feedback"} component={Feedbacks}/>
                   <Route path={"modules"} component={Modules}/>

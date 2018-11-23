@@ -25,6 +25,7 @@ import {
     setUsersFeedbacksIsNotLoad,
     setManagersFeedbacksIsNotLoad,
     setManagersIsNotLoad,
+    setUsersIsNotLoad,
     setFitnessCentersIsNotLoad,
     setModulesIsNotLoad,
     setModuleStatesIsNotLoad
@@ -60,6 +61,7 @@ class TopBar extends React.Component {
         this.props.setUsersFeedbacksIsNotLoad();
         this.props.setManagersFeedbacksIsNotLoad();
         this.props.setManagersIsNotLoad();
+        this.props.setUsersIsNotLoad();
         this.props.setFitnessCentersIsNotLoad();
         this.props.setModulesIsNotLoad();
         this.props.setModuleStatesIsNotLoad();
@@ -234,7 +236,9 @@ class TopBar extends React.Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown eventKey={3} title={<Glyphicon glyph="cog" />} id="basic-nav-dropdown">
+                            <NavDropdown eventKey={3} title={
+                                <span>{"Compte "}</span>
+                            } id="basic-nav-dropdown">
                                 <MenuItem eventKey={3.1} onClick={this.handleChangePasswordClick.bind(this)}>
                                     <Glyphicon glyph="pencil" />&nbsp;{Texts.MODIFIER_MDP.text_fr}
                                 </MenuItem>
@@ -340,6 +344,7 @@ export default connect(mapStateToProps, {
     setUsersFeedbacksIsNotLoad,
     setManagersFeedbacksIsNotLoad,
     setManagersIsNotLoad,
+    setUsersIsNotLoad,
     setFitnessCentersIsNotLoad,
     setModulesIsNotLoad,
     setModuleStatesIsNotLoad

@@ -840,6 +840,22 @@ const Texts = {
     CE_NUMERO_DE_SIRET_NEST_PAS_VALIDE: {
         text_fr: "Ce numéro de SIRET n'est pas valide.",
         text_en: "This SIRET number is not valid."
+    },
+    UTILISATEURS: {
+        text_fr: "Utilisateurs",
+        text_en: "Users"
+    },
+    NOM_LOGIN: {
+        text_fr: "Nom, login, email ...",
+        text_en: "Name, login, email ..."
+    },
+    LOGIN: {
+        text_fr: "Login",
+        text_en: "Login"
+    },
+    SIGNALEMENTS: {
+        text_fr: "Signalements",
+        text_en: "Reports"
     }
 };
 

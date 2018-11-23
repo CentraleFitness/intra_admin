@@ -33,9 +33,9 @@ class Menu extends React.Component {
                 <Panel className={"menu"}>
                     <Nav bsStyle="pills" stacked activeKey={this.state.active_key} onSelect={this.handleSelect.bind(this)}>
 
-                        <LinkContainer to={"/home"}>
-                            <NavItem eventKey={"home"}>
-                                <Glyphicon glyph="home" />&nbsp;&nbsp;{Texts.ACCUEIL.text_fr}
+                        <LinkContainer to={"/users"}>
+                            <NavItem eventKey={"users"}>
+                                <Glyphicon glyph="phone" />&nbsp;&nbsp;{Texts.UTILISATEURS.text_fr}
                             </NavItem>
                         </LinkContainer>
 
