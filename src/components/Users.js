@@ -103,7 +103,7 @@ class Users extends React.Component {
                 }
             },
             function (error) {
-                console.log(error);
+
                 if (me !== undefined) {
                     me.props.displayAlert({
                         alertTitle: Texts.ERREUR_TITRE.text_fr,
@@ -159,7 +159,7 @@ class Users extends React.Component {
                 }
             },
             function (error) {
-                console.log(error);
+
                 if (me !== undefined) {
                     me.props.displayAlert({
                         alertTitle: Texts.ERREUR_TITRE.text_fr,
