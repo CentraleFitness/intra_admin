@@ -856,6 +856,10 @@ const Texts = {
     SIGNALEMENTS: {
         text_fr: "Signalements",
         text_en: "Reports"
+    },
+    PAS_DE_SALLE: {
+        text_fr: "Pas de salle",
+        text_en: "No club"
     }
 };
 

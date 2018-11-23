@@ -314,7 +314,17 @@ class Users extends React.Component {
                                 <td style={{verticalAlign: "middle"}}>{item.last_name}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.login}</td>
                                 <td style={{verticalAlign: "middle"}}>{item.email_address}</td>
-                                <td style={{verticalAlign: "middle"}}>{item.fitness_center.name + " (" + item.fitness_center.city + ")"}</td>
+                                <td style={{verticalAlign: "middle"}}>
+                                    {
+                                        item.fitness_center !== undefined ?
+
+                                        item.fitness_center.name + " (" + item.fitness_center.city + ")"
+
+                                            :
+
+                                        Texts.PAS_DE_SALLE.text_fr
+                                    }
+                                </td>
                                 <td style={{verticalAlign: "middle"}}>{item.nb_report}</td>
 
                                 {/*<td style={{verticalAlign: "middle", textAlign: "center"}}>
