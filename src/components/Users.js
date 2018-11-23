@@ -217,7 +217,7 @@ class Users extends React.Component {
 
     getFitnessCenterBool(value_select, item) {
         return (
-            (value_select === undefined ||
+            value_select === undefined ||
             value_select === "" ||
                 (item.fitness_center !== undefined &&
                     value_select === item.fitness_center._id)
