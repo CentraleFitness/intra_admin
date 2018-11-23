@@ -208,14 +208,20 @@ class Users extends React.Component {
     }
 
     getNameBool(value, item) {
-        return ((item.first_name === undefined || item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+        return (
+            (item.first_name === undefined || item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
             (item.last_name === undefined || item.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
             (item.login === undefined || item.login.toLowerCase().search(value.toLowerCase()) !== -1) ||
             (item.email_address === undefined || item.email_address.toLowerCase().search(value.toLowerCase()) !== -1));
     }
 
     getFitnessCenterBool(value_select, item) {
-        return (value_select === undefined || value_select === "" || value_select === item.fitness_center._id);
+        return (
+            (value_select === undefined ||
+            value_select === "" ||
+                (item.fitness_center !== undefined &&
+                    value_select === item.fitness_center._id)
+        );
     }
 
     getDetailsOverlay(item) {
