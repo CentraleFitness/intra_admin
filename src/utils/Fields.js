@@ -43,7 +43,8 @@ const Fields = {
     FITNESS_CENTER_ID: "fitness_center_id",
     MACHINE_TYPE: "machine_type",
     MODULE_STATE_CODE: "module_state_code",
-    SIRET: "siret"
+    SIRET: "siret",
+    USER_ID: "user_id"
 };
 
 export default Fields;

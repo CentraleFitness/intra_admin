@@ -860,6 +860,22 @@ const Texts = {
     PAS_DE_SALLE: {
         text_fr: "Pas de salle",
         text_en: "No club"
+    },
+    UTILISATEUR: {
+        text_fr: "Utilisateur",
+        text_en: "User"
+    },
+    PUBLICATIONS_SIGNALEES: {
+        text_fr: "Publications signalées",
+        text_en: "Reported posts"
+    },
+    NOMBRE_DE_SIGNALEMENTS: {
+        text_fr: "Nombre de signalements",
+        text_en: "Number of reports"
+    },
+    INSCRIPTION: {
+        text_fr: "inscription",
+        text_en: "subscription"
     }
 };
 

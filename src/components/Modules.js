@@ -13,8 +13,6 @@ import {
     Col,
     ControlLabel,
     Table,
-    OverlayTrigger,
-    Tooltip,
     Checkbox,
     HelpBlock
 } from 'react-bootstrap';

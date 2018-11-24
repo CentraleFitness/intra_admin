@@ -25,6 +25,8 @@ const Paths = {
 
     MANAGER_ACTIVITY: "/manager_activity",
 
+    USER_ACTIVITY: "/user_activity",
+
     MANAGER_UNDO_REFUSE: "/manager_undo_refuse",
 
     MANAGER_FEEDBACK: "/manager_feedback",
