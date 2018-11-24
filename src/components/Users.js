@@ -261,160 +261,84 @@ class Users extends React.Component {
         }
     }
 
-    displayPost(item, isPost = true, isModal = false, publication_id = "") {
+    displayPost(item) {
 
         return (
             <div key={item._id}>
 
-                {
-                    (this.props.updatePublications === true || this.props.updatePublications === false) &&
+                <div className={"showNewLine " + (item.is_comment === false ? "post" : "post-comment")}>
 
-                    <div className={"showNewLine " + (isPost === true ? "post" : "post-comment")}>
+                    <h5>
+                        <Image
+                            className={"post-image"}
+                            src={
+                                (item.is_center === true ?
+                                    (item.posterPicture === "" ? "/img/store.svg" : item.posterPicture)
+                                    :
+                                    (item.posterPicture === "" ? "/img/user.svg" : item.posterPicture))
 
-                        <h5>
-                            <Image
-                                className={"post-image"}
-                                src={
-                                    (item.is_center === true ?
-                                        (item.posterPicture === "" ? "/img/store.svg" : item.posterPicture)
-                                        :
-                                        (item.posterPicture === "" ? "/img/user.svg" : item.posterPicture))
+                            }
+                        />
+                        &nbsp;{item.posterName} <em>{" ( " + Dates.format(item.date) + " ) "}</em>
+                    </h5>
 
-                                }
-                            />
-                            &nbsp;{item.posterName} <em>{" ( " + Dates.format(item.date) + " ) "}</em>
-                        </h5>
-
-                        {
-                            item.type === "EVENT" &&
-
-                            <div>
-                                <h4>{Texts.EVENEMENT.text_fr + " : " + item.title}</h4>
-                                <h5>{Dates.formatDateOnly(item.start_date) + " - " + Dates.formatDateOnly(item.end_date)}</h5>
-                            </div>
-                        }
-                        {
-                            item.type === "PHOTO" &&
-
-                            <h4>{item.title}</h4>
-                        }
-
-                        <p>{item.content}</p>
-
-                        {
-                            (item.type === "PHOTO" ||
-                                item.type === "EVENT") &&
-
-                            <div>
-                                <Image
-                                    alt={item.title}
-                                    src={item.picture}
-                                    className={"profileImage"}
-                                />
-                            </div>
-                        }
+                    {
+                        item.type === "EVENT" &&
 
                         <div>
+                            <h4>{Texts.EVENEMENT.text_fr + " : " + item.title}</h4>
+                            <h5>{Dates.formatDateOnly(item.start_date) + " - " + Dates.formatDateOnly(item.end_date)}</h5>
+                        </div>
+                    }
+                    {
+                        item.type === "PHOTO" &&
 
-                            <div style={{textAlign: "center", fontSize: "16px", verticalAlign: "text-top"}}>
+                        <h4>{item.title}</h4>
+                    }
 
-                                {
-                                    isPost === true &&
+                    <p>{item.content}</p>
 
-                                    <div>
-                                    <span>
-                                        <Glyphicon glyph="heart"/>
-                                        &nbsp;
-                                        {item.nb_likes}
-                                        &nbsp;
-                                        &nbsp;
-                                    </span>
-                                        {
-                                            isModal === true ?
+                    {
+                        (item.type === "PHOTO" ||
+                            item.type === "EVENT") &&
 
-                                                <span>
-                                            <Glyphicon glyph="comment"/>
-                                                    &nbsp;
-                                                    {item.nb_comments}
-                                                    &nbsp;
-                                        </span>
+                        <div>
+                            <Image
+                                alt={item.title}
+                                src={item.picture}
+                                className={"profileImage"}
+                            />
+                        </div>
+                    }
 
-                                                :
+                    <div>
 
-                                                <a className={"post-button"} onClick={this.handleShowPostDisplay.bind(this, item)}>
-                                            <span>
-                                                <Glyphicon glyph="comment"/>
-                                                &nbsp;
-                                                {item.nb_comments}
-                                                &nbsp;
-                                            </span>
-                                                </a>
-                                        }
+                        <div style={{textAlign: "center", fontSize: "16px", verticalAlign: "text-top"}}>
 
-                                    </div>
-                                }
-                                {
-                                    isPost === true &&
+                            {
+                                item.is_comment === false &&
 
-                                    <a className={"post-button"} onClick={this.handleLikeClick.bind(this, item)}>
-                                        {
-                                            item.likedByMe === true ?
+                                <div>
+                                <span>
+                                    <Glyphicon glyph="heart"/>
+                                    &nbsp;
+                                    {item.nb_likes}
+                                    &nbsp;
+                                    &nbsp;
+                                </span>
 
-                                                <span>
-                                                <Glyphicon glyph="heart"/>
-                                                    &nbsp;
-                                                    {Texts.JE_NAIME_PAS.text_fr}
-                                            </span>
-
-                                                :
-
-                                                <span>
-                                                <Glyphicon glyph="heart-empty"/>
-                                                    &nbsp;
-                                                    {Texts.JAIME.text_fr}
-                                            </span>
-                                        }
-                                    </a>
-                                }
-                                &nbsp;
-                                &nbsp;
-                                {
-                                    isPost === true &&
-
-                                    <a className={"post-button"} onClick={
-                                        isModal === true ? this.handleShowCommentArea.bind(this) : this.handleShowPostDisplay.bind(this, item, true)
-                                    }>
-                                    <span style={{verticalAlign: "text-top"}}>
+                                <span>
                                     <Glyphicon glyph="comment"/>
-                                        &nbsp;
-                                        {Texts.COMMENTER.text_fr}
-                                    </span>
-                                    </a>
-                                }
-                                &nbsp;
-                                &nbsp;
-                                {
-                                    item.isMine === true &&
+                                    &nbsp;
+                                    {item.nb_comments}
+                                    &nbsp;
+                                </span>
 
-                                    <a
-                                        onClick={isPost === true ?
-                                            this.onPublicationDelete.bind(this, item) :
-                                            this.onCommentDelete.bind(this, item, publication_id)
-                                        }
-                                        className={"post-button cross-background"}
-                                    >
-
-                                    <span style={{verticalAlign: "text-top"}}>
-                                        <Glyphicon glyph="remove"/>
-                                        &nbsp;
-                                        {Texts.SUPPRIMER.text_fr}
-                                    </span>
-                                    </a>
-                                }
-                            </div>
+                                </div>
+                            }
                         </div>
                     </div>
-                }
+                </div>
             </div>
         );
     }
