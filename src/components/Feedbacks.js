@@ -3,12 +3,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
-    Panel,
     Glyphicon,
     Modal,
     FormControl,
     Button,
-    Tabs, Tab, Table
+    Tabs,
+    Tab
 } from 'react-bootstrap';
 
 import {
