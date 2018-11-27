@@ -129,7 +129,13 @@ class UsersFeedbacks extends React.Component {
                                 <td>{item.user.first_name + " " + item.user.last_name}</td>
                                 <td>{item.user.login}</td>
                                 <td>{item.email}</td>
-                                <td>{item.fitness_center.name + " (" + item.fitness_center.zip_code + ", " + item.fitness_center.city + ")"}</td>
+                                <td>
+                                    {
+                                        item.fitness_center !== undefined &&
+
+                                        item.fitness_center.name + " (" + item.fitness_center.zip_code + ", " + item.fitness_center.city + ")"
+                                    }
+                                </td>
                                 <td>{item.version}</td>
                             </tr>
                         ))

@@ -1,7 +1,5 @@
 const Paths = {
 
-    SIRET_API: "https://www.numero-de-siret.com/api",
-
     SIRET: "/siret",
 
     HOST: "http://91.121.155.83:8083",
