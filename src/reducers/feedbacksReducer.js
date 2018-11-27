@@ -1,5 +1,6 @@
 import {
     SET_MANAGERS_FEEDBACKS,
+    SET_FEEDBACK_STATES,
     SET_USERS_FEEDBACKS,
     DISPLAY_FEEDBACK,
     DISMISS_FEEDBACK
@@ -9,6 +10,7 @@ const initialState = {
     users_feedbacks: [],
 
     managers_feedbacks: [],
+    feedback_states: [],
     currentFeedback: {
         _id: "t",
         email: "",
@@ -39,6 +41,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 managers_feedbacks: action.payload
+            };
+        case SET_FEEDBACK_STATES:
+            return {
+                ...state,
+                feedback_states: action.payload
             };
         case DISPLAY_FEEDBACK:
             return {

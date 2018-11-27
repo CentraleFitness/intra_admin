@@ -117,6 +117,7 @@ class UsersFeedbacks extends React.Component {
                         <th>Nom de l'utilisateur</th>
                         <th>Login de l'utilisateur</th>
                         <th>Email de l'utilisateur</th>
+                        <th>Date d'émission</th>
                         <th>Nom de la salle</th>
                         <th>Version de l'application</th>
                     </tr>
@@ -125,10 +126,11 @@ class UsersFeedbacks extends React.Component {
 
                     {
                         this.props.users_feedbacks.map((item, index) => (
-                            <tr style={this.setCursor()} onClick={this.handleFeedbackClick.bind(this, item)}>
+                            <tr key={item._id} style={this.setCursor()} onClick={this.handleFeedbackClick.bind(this, item)}>
                                 <td>{item.user.first_name + " " + item.user.last_name}</td>
                                 <td>{item.user.login}</td>
                                 <td>{item.email}</td>
+                                <td>{Dates.format(new Date(item.date).getTime())}</td>
                                 <td>
                                     {
                                         item.fitness_center !== undefined &&
@@ -147,10 +149,10 @@ class UsersFeedbacks extends React.Component {
                     this.props.showUserFeedback === true &&
 
 
-                    <Modal show={this.props.showUserFeedback} bsSize={"medium"}
+                    <Modal show={this.props.showUserFeedback} bsSize={"large"}
                            onHide={this.handleFeedbackDismiss.bind(this)}>
                         <Modal.Header closeButton>
-                            <Modal.Title>{"Feedback utilisateur: " + this.props.currentFeedback.user.login}</Modal.Title>
+                            <Modal.Title>{"Feedback utilisateur : " + this.props.currentFeedback.user.login}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <FormControl.Static>

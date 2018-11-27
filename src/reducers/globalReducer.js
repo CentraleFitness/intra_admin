@@ -5,6 +5,7 @@ import {
     SET_ADMINISTRATORS_IS_LOAD,
     SET_USERS_FEEDBACKS_IS_LOAD,
     SET_MANAGERS_FEEDBACKS_IS_LOAD,
+    SET_FEEDBACK_STATES_IS_LOAD,
     SET_MANAGERS_IS_LOAD,
     SET_USERS_IS_LOAD,
     SET_FITNESS_CENTERS_IS_LOAD,
@@ -14,6 +15,7 @@ import {
     SET_ADMINISTRATORS_IS_NOT_LOAD,
     SET_USERS_FEEDBACKS_IS_NOT_LOAD,
     SET_MANAGERS_FEEDBACKS_IS_NOT_LOAD,
+    SET_FEEDBACK_STATES_IS_NOT_LOAD,
     SET_MANAGERS_IS_NOT_LOAD,
     SET_USERS_IS_NOT_LOAD,
     SET_FITNESS_CENTERS_IS_NOT_LOAD,
@@ -30,6 +32,7 @@ const initialState = {
     administrators_is_load: false,
     users_feedbacks_is_load: false,
     managers_feedbacks_is_load: false,
+    feedback_states_is_load: false,
     managers_is_load: false,
     users_is_load: false,
     fitness_centers_is_load: false,
@@ -67,6 +70,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 managers_feedbacks_is_load: true
+            };
+        case SET_FEEDBACK_STATES_IS_LOAD:
+            return {
+                ...state,
+                feedback_states_is_load: true
             };
         case SET_MANAGERS_IS_LOAD:
             return {
@@ -109,6 +117,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 managers_feedbacks_is_load: false
+            };
+        case SET_FEEDBACK_STATES_IS_NOT_LOAD:
+            return {
+                ...state,
+                feedback_states_is_load: false
             };
         case SET_MANAGERS_IS_NOT_LOAD:
             return {

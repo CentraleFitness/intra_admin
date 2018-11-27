@@ -876,6 +876,14 @@ const Texts = {
     INSCRIPTION: {
         text_fr: "inscription",
         text_en: "subscription"
+    },
+    REPONDRE: {
+        text_fr: "Répondre",
+        text_en: "Respond"
+    },
+    REPONSE: {
+        text_fr: "Réponse",
+        text_en: "Response"
     }
 };
 

@@ -36,6 +36,10 @@ const Paths = {
     MODULE: "/module",
 
     MODULE_STATE: "/module_state",
+
+    ADD_RESPONSE_FEEDBACK: "/feedback_response",
+
+    FEEDBACK_STATE: '/feedback_state'
 };
 
 export default Paths;

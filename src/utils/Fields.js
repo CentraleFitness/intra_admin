@@ -44,7 +44,10 @@ const Fields = {
     MACHINE_TYPE: "machine_type",
     MODULE_STATE_CODE: "module_state_code",
     SIRET: "siret",
-    USER_ID: "user_id"
+    USER_ID: "user_id",
+    CONTENT: "content",
+    FEEDBACK_ID: "feedback_id",
+    FEEDBACK_STATE_CODE: "feedback_state_code"
 };
 
 export default Fields;

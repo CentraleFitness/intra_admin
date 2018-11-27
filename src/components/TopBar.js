@@ -24,6 +24,7 @@ import {
     setAdministratorsIsNotLoad,
     setUsersFeedbacksIsNotLoad,
     setManagersFeedbacksIsNotLoad,
+    setFeedbackStatesIsNotLoad,
     setManagersIsNotLoad,
     setUsersIsNotLoad,
     setFitnessCentersIsNotLoad,
@@ -60,6 +61,7 @@ class TopBar extends React.Component {
         this.props.setAdministratorsIsNotLoad();
         this.props.setUsersFeedbacksIsNotLoad();
         this.props.setManagersFeedbacksIsNotLoad();
+        this.props.setFeedbackStatesIsNotLoad();
         this.props.setManagersIsNotLoad();
         this.props.setUsersIsNotLoad();
         this.props.setFitnessCentersIsNotLoad();
@@ -343,6 +345,7 @@ export default connect(mapStateToProps, {
     setAdministratorsIsNotLoad,
     setUsersFeedbacksIsNotLoad,
     setManagersFeedbacksIsNotLoad,
+    setFeedbackStatesIsNotLoad,
     setManagersIsNotLoad,
     setUsersIsNotLoad,
     setFitnessCentersIsNotLoad,
