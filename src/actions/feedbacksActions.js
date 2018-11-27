@@ -1,5 +1,6 @@
 import {
     SET_MANAGERS_FEEDBACKS,
+    SET_FEEDBACK_STATES,
     SET_USERS_FEEDBACKS,
     DISPLAY_FEEDBACK,
     DISMISS_FEEDBACK
@@ -9,6 +10,13 @@ export const setManagersFeedbacks = (feebacks) => {
     return {
         type: SET_MANAGERS_FEEDBACKS,
         payload: feebacks
+    };
+};
+
+export const setFeedbackStates = (feeback_states) => {
+    return {
+        type: SET_FEEDBACK_STATES,
+        payload: feeback_states
     };
 };
 
