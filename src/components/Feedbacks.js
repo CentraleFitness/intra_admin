@@ -22,12 +22,6 @@ import {
 } from "../actions/feedbacksActions";
 
 import Texts from "../utils/Texts";
-import Communication from "../utils/Communication";
-import Status from "../utils/Status";
-import Fields from "../utils/Fields";
-import Paths from "../utils/Paths";
-import Dates from "../utils/Dates";
-import HttpMethods from "../utils/HttpMethods";
 import ManagersFeedbacks from "./ManagersFeedbacks";
 import UsersFeedbacks from "./UsersFeedbacks";
 
