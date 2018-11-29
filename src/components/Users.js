@@ -591,7 +591,10 @@ class Users extends React.Component {
                 {
                     this.state.loading === true &&
 
-                        <h4 style={{textAlign: "center"}}>Chargement ...</h4>
+                        <div>
+                            <h4 style={{textAlign: "center"}}>Chargement ...</h4>
+                            <Image src={"/img/loading.svg"}/>
+                        </div>
                 }
 
                 <Table responsive>
