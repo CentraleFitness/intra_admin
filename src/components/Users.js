@@ -49,6 +49,13 @@ import '../styles/Users.css';
 
 class Users extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false
+        };
+    }
+
     componentWillMount() {
         if (this.props.users_is_load === false) {
             this.getUsers();
@@ -59,6 +66,11 @@ class Users extends React.Component {
     }
 
     getUsers() {
+
+        this.setState({
+            loading: true
+        });
+
         let params = {};
 
         params[Fields.TOKEN] = localStorage.getItem("token");
@@ -68,7 +80,13 @@ class Users extends React.Component {
         let communication = new Communication(HttpMethods.GET, Paths.HOST + Paths.USER, params);
         communication.sendRequest(
             function (response) {
+
+                me.setState({
+                    loading: false
+                });
+
                 if (response.status === 200) {
+
                     if (response.data.code === Status.GENERIC_OK.code) {
 
                         if (me !== undefined) {
@@ -105,6 +123,10 @@ class Users extends React.Component {
                 }
             },
             function (error) {
+
+                me.setState({
+                    loading: false
+                });
 
                 if (me !== undefined) {
                     me.props.displayAlert({
@@ -565,6 +587,12 @@ class Users extends React.Component {
                         <Glyphicon glyph="refresh" /> {Texts.REINITIALISER_LES_FILTRES.text_fr}
                     </Button>
                 </Panel>
+
+                {
+                    this.state.loading === true &&
+
+                        <span>Chargement ...</span>
+                }
 
                 <Table responsive>
                     <thead>
