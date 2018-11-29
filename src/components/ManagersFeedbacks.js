@@ -30,6 +30,7 @@ import HttpMethods from "../utils/HttpMethods";
 import FormControl from "react-bootstrap/es/FormControl";
 
 import "../styles/Feedback.css";
+import Col from "react-bootstrap/es/Col";
 
 class ManagersFeedbacks extends React.Component {
     constructor(props) {
@@ -179,6 +180,8 @@ class ManagersFeedbacks extends React.Component {
                     if (response.data.code === Status.GENERIC_OK.code) {
                         if (me !== undefined) {
                             me.props.setFeedbackStates(response.data.feedback_states);
+                            // Récupère tous les états possibles d'un feedback state
+                            // ==> etablir un select sur tous ces etats.
                             // Afficher un select de differents feedback_state / le set une fois confirmé
                             me.props.setFeedbackStatesIsLoad();
                         }
@@ -278,7 +281,7 @@ class ManagersFeedbacks extends React.Component {
     }
 
     handleFeedbackResponseSend() {
-        if (this.state.feedback_current_response.length > 0){
+        if (this.state.feedback_current_response.length > 0) {
 
         }
     }
@@ -354,6 +357,23 @@ class ManagersFeedbacks extends React.Component {
                                     </Button>
                                 </Grid>
                             </div>
+                            {console.log(this.props.feedback_states)}
+                            <Col><h5>Modifier la valeur du ticket :</h5></Col>
+                            <Col>
+                                <select
+                                    value={this.props.currentFeedback.feedback_state}>
+                                    {
+                                        this.props.feedback_states.map((item, index) => (
+                                            <option
+                                                key={item._id}
+                                                value={item.code}
+                                                //onClick={this.handleFeedbackStateSend.bind(this)}
+                                            >{item.text_fr}</option>
+                                        ))
+                                    }
+                                </select>
+                            </Col>
+
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleFeedbackDismiss.bind(this)}><Glyphicon
