@@ -591,7 +591,7 @@ class Users extends React.Component {
                 {
                     this.state.loading === true &&
 
-                        <span>Chargement ...</span>
+                        <h4 style={{textAlign: "center"}}>Chargement ...</h4>
                 }
 
                 <Table responsive>
