@@ -717,7 +717,7 @@ class Users extends React.Component {
                                     </Col>
                                     <Col xs={12} sm={12} md={3} lg={3}>
                                         {
-                                            this.getReportStyle(this.props.details_modal_user.nb_report)
+                                            this.getReportStyle(this.props.details_modal_user.nb_reports)
                                         }
                                     </Col>
                                 </FormGroup>
