@@ -592,8 +592,12 @@ class Users extends React.Component {
                     this.state.loading === true &&
 
                         <div>
+                            <Image
+                                src={"/img/loading.svg"}
+                                className={"center-block"}
+                                style={{height: 50, width: 50}}
+                            />
                             <h4 style={{textAlign: "center"}}>Chargement ...</h4>
-                            <Image src={"/img/loading.svg"} className={"center-block"} style={{height: 50, width: 50}}/>
                         </div>
                 }
 
