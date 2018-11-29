@@ -45,6 +45,7 @@ import Dates from "../utils/Dates";
 import HttpMethods from "../utils/HttpMethods";
 
 import 'react-select/dist/react-select.css';
+import '../styles/Users.css';
 
 class Users extends React.Component {
 
@@ -319,23 +320,31 @@ class Users extends React.Component {
                                 item.is_comment === false &&
 
                                 <div>
-                                <span>
-                                    <Glyphicon glyph="heart"/>
-                                    &nbsp;
-                                    {item.nb_likes}
-                                    &nbsp;
-                                    &nbsp;
-                                </span>
+                                    <span>
+                                        <Glyphicon glyph="heart"/>
+                                        &nbsp;
+                                        {item.nb_likes}
+                                        &nbsp;
+                                        &nbsp;
+                                    </span>
 
-                                <span>
-                                    <Glyphicon glyph="comment"/>
-                                    &nbsp;
-                                    {item.nb_comments}
-                                    &nbsp;
-                                </span>
+                                    <span>
+                                        <Glyphicon glyph="comment"/>
+                                        &nbsp;
+                                        {item.nb_comments}
+                                        &nbsp;
+                                    </span>
 
                                 </div>
                             }
+                            <div>
+                                <span>
+                                    <Glyphicon glyph="bullhorn"/>
+                                    &nbsp;
+                                    {item.nb_report}
+                                    &nbsp;
+                                    </span>
+                            </div>
                         </div>
                     </div>
                 </div>

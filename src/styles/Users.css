@@ -1,0 +1,28 @@
+.showNewLine{
+    white-space: pre-wrap;
+}
+
+.post {
+    border-radius: 10px;
+    border: solid rgb(255, 189, 104) 2px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.post-comment {
+    border-radius: 10px;
+    border: solid rgb(255, 88, 137) 2px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.post-image {
+
+    max-height: 50px;
+    max-width:50px;
+}
+
+.post-button {
+    text-decoration: underline;
+    cursor: pointer;
+}
