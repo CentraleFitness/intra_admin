@@ -594,7 +594,7 @@ class Users extends React.Component {
                                 </td>
                                 <td style={{verticalAlign: "middle"}}>
                                     {
-                                        this.getReportStyle(item.nb_reports)
+                                        this.getReportStyle(item.nb_report)
                                     }
                                 </td>
 
@@ -716,7 +716,7 @@ class Users extends React.Component {
                                     </Col>
                                     <Col xs={12} sm={12} md={3} lg={3}>
                                         {
-                                            this.getReportStyle(this.props.details_modal_user.nb_reports)
+                                            this.getReportStyle(this.props.details_modal_user.nb_report)
                                         }
                                     </Col>
                                 </FormGroup>
