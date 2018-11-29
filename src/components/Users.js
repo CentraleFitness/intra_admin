@@ -316,10 +316,10 @@ class Users extends React.Component {
 
                         <div style={{textAlign: "center", fontSize: "16px", verticalAlign: "text-top"}}>
 
-                            {
-                                item.is_comment === false &&
+                            <div>
+                                {
+                                    item.is_comment === false &&
 
-                                <div>
                                     <span>
                                         <Glyphicon glyph="heart"/>
                                         &nbsp;
@@ -327,6 +327,9 @@ class Users extends React.Component {
                                         &nbsp;
                                         &nbsp;
                                     </span>
+                                }
+                                {
+                                    item.is_comment === false &&
 
                                     <span>
                                         <Glyphicon glyph="comment"/>
@@ -334,17 +337,15 @@ class Users extends React.Component {
                                         {item.nb_comments}
                                         &nbsp;
                                     </span>
-
-                                </div>
-                            }
-                            <div>
+                                }
                                 <span>
                                     <Glyphicon glyph="bullhorn"/>
                                     &nbsp;
                                     {item.nb_report}
                                     &nbsp;
-                                    </span>
+                                </span>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -489,7 +490,9 @@ class Users extends React.Component {
 
         let color = "green";
         let weight = "normal";
-        if (nb >= 5) {
+        if (nb > 0) {
+            color = "black";
+        } else if (nb >= 5) {
             weight = "bold";
             if (nb >= 15) {
                 color = "red";
