@@ -336,6 +336,7 @@ class Users extends React.Component {
                                         &nbsp;
                                         {item.nb_comments}
                                         &nbsp;
+                                        &nbsp;
                                     </span>
                                 }
                                 <span>
@@ -343,9 +344,10 @@ class Users extends React.Component {
                                     &nbsp;
                                     {item.nb_report}
                                     &nbsp;
+                                    &nbsp;
                                 </span>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
