@@ -884,6 +884,10 @@ const Texts = {
     REPONSE: {
         text_fr: "Réponse",
         text_en: "Response"
+    },
+    CHARGEMENT: {
+        text_fr: "Chargement ...",
+        text_en: "Loading ..."
     }
 };
 

@@ -597,7 +597,7 @@ class Users extends React.Component {
                                 className={"center-block"}
                                 style={{height: 50, width: 50}}
                             />
-                            <h4 style={{textAlign: "center"}}>Chargement ...</h4>
+                            <h4 style={{textAlign: "center"}}>{Texts.CHARGEMENT.text_fr}</h4>
                         </div>
                 }
 
