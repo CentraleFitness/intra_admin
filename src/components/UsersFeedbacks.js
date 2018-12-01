@@ -189,7 +189,7 @@ class UsersFeedbacks extends React.Component {
                     this.props.showUserFeedback === true &&
 
 
-                    <Modal show={this.props.showUserFeedback} bsSize={"large"}
+                    <Modal show={this.props.showUserFeedback}
                            onHide={this.handleFeedbackDismiss.bind(this)}>
                         <Modal.Header closeButton>
                             <Modal.Title>{"Feedback utilisateur"}</Modal.Title>
