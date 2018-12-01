@@ -685,8 +685,9 @@ class Users extends React.Component {
                     <Modal.Header closeButton>
                         <Modal.Title>
                             {
-                                this.props.details_modal_user.login + " - " +
-                                this.props.details_modal_user.fitness_center.name
+                                this.props.details_modal_user.login +
+                                (this.props.details_modal_user.fitness_center !== undefined ?
+                                    " - " + this.props.details_modal_user.fitness_center.name : "")
                             }
                         </Modal.Title>
                     </Modal.Header>
@@ -847,76 +848,80 @@ class Users extends React.Component {
 
                             </Form>
                         </Panel>
-                        <Panel header={Texts.SALLE_SPORT.text_fr}>
-                            <Form horizontal>
+                        {
+                            this.props.details_modal_user.fitness_center !== undefined &&
 
-                                <FormGroup>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
+                            <Panel header={Texts.SALLE_SPORT.text_fr}>
+                                <Form horizontal>
+
+                                    <FormGroup>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.DATE_DE_CREATION.text_fr + " : "}
                                         </span>
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
-                                        {Dates.format(this.props.details_modal_user.fitness_center.creation_date)}
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
+                                            {Dates.format(this.props.details_modal_user.fitness_center.creation_date)}
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.NOM.text_fr + " : "}
                                         </span>
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
-                                        {this.props.details_modal_user.fitness_center.name}
-                                    </Col>
-                                </FormGroup>
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
+                                            {this.props.details_modal_user.fitness_center.name}
+                                        </Col>
+                                    </FormGroup>
 
-                                <FormGroup>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
+                                    <FormGroup>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.ADRESSE.text_fr + " : "}
                                         </span>
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
-                                        {this.props.details_modal_user.fitness_center.address}
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
+                                            {this.props.details_modal_user.fitness_center.address}
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.VILLE.text_fr + " : "}
                                         </span>
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
-                                        {this.props.details_modal_user.fitness_center.city}
-                                    </Col>
-                                </FormGroup>
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
+                                            {this.props.details_modal_user.fitness_center.city}
+                                        </Col>
+                                    </FormGroup>
 
-                                <FormGroup>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
+                                    <FormGroup>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.ADRESSE_COMPLEMENT.text_fr + " : "}
                                         </span>
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
-                                        {
-                                            (
-                                                (this.props.details_modal_user.fitness_center.address_second === "" ||
-                                                    this.props.details_modal_user.fitness_center.address_second === null ||
-                                                    this.props.details_modal_user.fitness_center.address_second === undefined) ?
-                                                    "/" : this.props.details_modal_user.fitness_center.address_second
-                                            )
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
+                                            {
+                                                (
+                                                    (this.props.details_modal_user.fitness_center.address_second === "" ||
+                                                        this.props.details_modal_user.fitness_center.address_second === null ||
+                                                        this.props.details_modal_user.fitness_center.address_second === undefined) ?
+                                                        "/" : this.props.details_modal_user.fitness_center.address_second
+                                                )
 
-                                        }
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
+                                            }
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
                                         <span style={{fontWeight: "bold"}}>
                                             {Texts.CODE_POSTAL.text_fr + " : "}
                                         </span>
-                                    </Col>
-                                    <Col xs={12} sm={12} md={3} lg={3}>
-                                        {this.props.details_modal_user.fitness_center.zip_code}
-                                    </Col>
-                                </FormGroup>
+                                        </Col>
+                                        <Col xs={12} sm={12} md={3} lg={3}>
+                                            {this.props.details_modal_user.fitness_center.zip_code}
+                                        </Col>
+                                    </FormGroup>
 
-                            </Form>
-                        </Panel>
+                                </Form>
+                            </Panel>
+                        }
                         <Panel header={Texts.PUBLICATIONS_SIGNALEES.text_fr}>
                             {
                                 this.props.details_modal_user.reported_posts.map((item) => (
