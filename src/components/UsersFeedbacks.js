@@ -215,6 +215,17 @@ class UsersFeedbacks extends React.Component {
                                 }
                             </FormControl.Static>
                             <FormControl.Static>
+                                <span
+                                    style={{fontWeight: "bold"}}>{Texts.SALLE_SPORT.text_fr + " : "}</span>
+                                {
+                                    this.props.currentFeedback.fitness_center !== undefined &&
+
+                                    this.props.currentFeedback.fitness_center.name + " (" +
+                                    this.props.currentFeedback.fitness_center.zip_code + ", " +
+                                    this.props.currentFeedback.fitness_center.city + ")"
+                                }
+                            </FormControl.Static>
+                            <FormControl.Static>
                                     <span
                                         style={{fontWeight: "bold"}}>{Texts.DATE_DE_CREATION.text_fr + " : "}</span>
                                     {Dates.format(this.props.currentFeedback.date)}
