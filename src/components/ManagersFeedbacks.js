@@ -119,7 +119,6 @@ class ManagersFeedbacks extends React.Component {
                 if (response.status === 200) {
                     if (response.data.code === Status.GENERIC_OK.code) {
                         if (me !== undefined) {
-                            console.log(response.data.feedbacks);
                             me.props.setManagersFeedbacks(response.data.feedbacks);
                             // Si déjà chargé et donc ne pas faire les requetes à nouveau
                             me.props.setManagersFeedbacksIsLoad();
