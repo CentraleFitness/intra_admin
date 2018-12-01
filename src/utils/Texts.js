@@ -920,6 +920,10 @@ const Texts = {
     VERSION_DE_LAPPLICATION: {
         text_fr: "Version de l'application",
         text_en: "Application version"
+    },
+    CONTENU: {
+        text_fr: "Contenu",
+        text_en: "Content"
     }
 };
 

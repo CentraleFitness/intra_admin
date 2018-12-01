@@ -176,7 +176,9 @@ class UsersFeedbacks extends React.Component {
                                         item.fitness_center.name + " (" + item.fitness_center.zip_code + ", " + item.fitness_center.city + ")"
                                     }
                                 </td>
-                                <td>{item.version}</td>
+                                <td style={{textAlign: "center", verticalAlign: "middle"}}>
+                                    {item.version}
+                                </td>
                             </tr>
                         ))
                     }
@@ -209,7 +211,7 @@ class UsersFeedbacks extends React.Component {
                             <FormControl.Static>
                                 <span style={{fontWeight: "bold"}}>{Texts.EMAIL.text_fr + " : "}</span>
                                 {
-                                    this.props.currentFeedback.user.email
+                                    this.props.currentFeedback.email
                                 }
                             </FormControl.Static>
                             <FormControl.Static>
@@ -223,6 +225,10 @@ class UsersFeedbacks extends React.Component {
                                     {this.props.currentFeedback.version}
                             </FormControl.Static>
                             <FormControl.Static>
+                                <span
+                                    style={{fontWeight: "bold"}}>{Texts.CONTENU.text_fr + " : "}
+                                </span>
+                                <br/>
                                 {this.props.currentFeedback.content}
                             </FormControl.Static>
                         </Modal.Body>
