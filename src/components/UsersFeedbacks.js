@@ -143,27 +143,33 @@ class UsersFeedbacks extends React.Component {
                         </FormGroup>
                     </Form>
                 </Panel>
-                <Table striped bordered condensed hover>
+                <Table responsive>
                     <thead>
                     <tr>
-                        <th>Nom de l'utilisateur</th>
-                        <th>Login de l'utilisateur</th>
-                        <th>Email de l'utilisateur</th>
-                        <th>Date d'émission</th>
-                        <th>Nom de la salle</th>
-                        <th>Version de l'application</th>
+                        <th style={{textAlign: "center"}}></th>
+                        <th style={{textAlign: "center"}}>{Texts.NOM.text_fr}</th>
+                        <th style={{textAlign: "center"}}>{Texts.LOGIN.text_fr}</th>
+                        <th style={{textAlign: "center"}}>{Texts.EMAIL.text_fr}</th>
+                        <th style={{textAlign: "center"}}>{Texts.DATE_DE_CREATION.text_fr}</th>
+                        <th style={{textAlign: "center"}}>{Texts.NOM_SALLE.text_fr}</th>
+                        <th style={{textAlign: "center"}}>{Texts.VERSION_DE_LAPPLICATION.text_fr}</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     {
                         this.props.users_feedbacks.map((item, index) => (
-                            <tr key={item._id} style={{cursor: "pointer"}} onClick={this.handleFeedbackClick.bind(this, item)}>
-                                <td>{item.user.first_name + " " + item.user.last_name}</td>
-                                <td>{item.user.login}</td>
-                                <td>{item.email}</td>
-                                <td>{Dates.format(new Date(item.date).getTime())}</td>
-                                <td>
+                            <tr key={item._id}>
+                                <td style={{verticalAlign: "middle"}}>
+                                    <Button onClick={this.handleFeedbackClick.bind(this, item)}>
+                                        <Glyphicon glyph="eye-open" />
+                                    </Button>
+                                </td>
+                                <td style={{textAlign: "center", verticalAlign: "middle"}}>{item.user.first_name + " " + item.user.last_name}</td>
+                                <td style={{textAlign: "center", verticalAlign: "middle"}}>{item.user.login}</td>
+                                <td style={{textAlign: "center", verticalAlign: "middle"}}>{item.email}</td>
+                                <td style={{textAlign: "center", verticalAlign: "middle"}}>{Dates.format(new Date(item.date).getTime())}</td>
+                                <td style={{textAlign: "center", verticalAlign: "middle"}}>
                                     {
                                         item.fitness_center !== undefined &&
 
@@ -184,9 +190,38 @@ class UsersFeedbacks extends React.Component {
                     <Modal show={this.props.showUserFeedback} bsSize={"large"}
                            onHide={this.handleFeedbackDismiss.bind(this)}>
                         <Modal.Header closeButton>
-                            <Modal.Title>{"Feedback utilisateur : " + this.props.currentFeedback.user.login}</Modal.Title>
+                            <Modal.Title>{"Feedback utilisateur"}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                            <FormControl.Static>
+                                <span style={{fontWeight: "bold"}}>{Texts.NOM.text_fr + " : "}</span>
+                                {
+                                    this.props.currentFeedback.user.first_name + " " +
+                                    this.props.currentFeedback.user.last_name
+                                }
+                            </FormControl.Static>
+                            <FormControl.Static>
+                                <span style={{fontWeight: "bold"}}>{Texts.LOGIN.text_fr + " : "}</span>
+                                {
+                                    this.props.currentFeedback.user.login
+                                }
+                            </FormControl.Static>
+                            <FormControl.Static>
+                                <span style={{fontWeight: "bold"}}>{Texts.EMAIL.text_fr + " : "}</span>
+                                {
+                                    this.props.currentFeedback.user.email
+                                }
+                            </FormControl.Static>
+                            <FormControl.Static>
+                                    <span
+                                        style={{fontWeight: "bold"}}>{Texts.DATE_DE_CREATION.text_fr + " : "}</span>
+                                    {Dates.format(this.props.currentFeedback.date)}
+                            </FormControl.Static>
+                            <FormControl.Static>
+                                    <span
+                                        style={{fontWeight: "bold"}}>{Texts.VERSION_DE_LAPPLICATION.text_fr + " : "}</span>
+                                    {this.props.currentFeedback.version}
+                            </FormControl.Static>
                             <FormControl.Static>
                                 {this.props.currentFeedback.content}
                             </FormControl.Static>

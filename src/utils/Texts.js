@@ -916,6 +916,10 @@ const Texts = {
     OBJET_NOM_CONTENU: {
         text_fr: "Objet, nom, contenu ...",
         text_en: "Object, name, content ..."
+    },
+    VERSION_DE_LAPPLICATION: {
+        text_fr: "Version de l'application",
+        text_en: "Application version"
     }
 };
 

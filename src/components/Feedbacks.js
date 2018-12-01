@@ -61,10 +61,10 @@ class Feedbacks extends React.Component {
             <div>
 
                 <Tabs id={"feedbackTabs"} activeKey={this.state.key} onSelect={this.handleSelect}>
-                    <Tab.Pane eventKey={"Managers"} title="Managers">
+                    <Tab.Pane eventKey={"Managers"} title={Texts.GERANT.text_fr}>
                         <ManagersFeedbacks/>
                     </Tab.Pane>
-                    <Tab.Pane eventKey={"Users"} title="Users">
+                    <Tab.Pane eventKey={"Users"} title={Texts.UTILISATEURS.text_fr}>
                         <UsersFeedbacks/>
                     </Tab.Pane>
                 </Tabs>
