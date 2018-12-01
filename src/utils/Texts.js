@@ -888,6 +888,34 @@ const Texts = {
     CHARGEMENT: {
         text_fr: "Chargement ...",
         text_en: "Loading ..."
+    },
+    MODIFIER_LETAT_DU_TICKET: {
+        text_fr: "Modifier le status du ticket",
+        text_en: "Update ticket state"
+    },
+    TICKET: {
+        text_fr: "Ticket",
+        text_en: "Ticket"
+    },
+    OBJET: {
+        text_fr: "Objet",
+        text_en: "Object"
+    },
+    STATUS_DU_TICKET: {
+        text_fr: "Status du ticket",
+        text_en: "Status of the ticket"
+    },
+    NOM_DU_GERANT: {
+        text_fr: "Nom du gérant",
+        text_en: "Manager's name"
+    },
+    LOGIN_NOM_EMAIL: {
+        text_fr: "Login, nom, email, contenu ...",
+        text_en: "Login, name email, content ..."
+    },
+    OBJET_NOM_CONTENU: {
+        text_fr: "Objet, nom, contenu ...",
+        text_en: "Object, name, content ..."
     }
 };
 

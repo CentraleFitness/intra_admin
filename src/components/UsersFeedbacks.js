@@ -3,8 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {
-    Button, Glyphicon,
-    Modal,
+    Button, Col, ControlLabel, Form, FormGroup, Glyphicon,
+    Modal, Panel,
     Table
 } from 'react-bootstrap';
 
@@ -16,7 +16,9 @@ import {
 import {
     dismissFeedback,
     displayFeedback,
-    setUsersFeedbacks
+    setUsersFeedbacks,
+    setInitialUsersFeedbacks,
+    setUsersFilterKeywords
 } from "../actions/feedbacksActions";
 
 import Texts from "../utils/Texts";
@@ -50,6 +52,7 @@ class UsersFeedbacks extends React.Component {
                     if (response.data.code === Status.GENERIC_OK.code) {
                         if (me !== undefined) {
                             me.props.setUsersFeedbacks(response.data.feedbacks);
+                            me.props.setInitialUsersFeedbacks(response.data.feedbacks);
                             me.props.setUsersFeedbacksIsLoad();
                         }
 
@@ -71,7 +74,6 @@ class UsersFeedbacks extends React.Component {
                         }
                     }
                 } else {
-                    console.log("hello");
                     if (me !== undefined) {
                         me.props.displayAlert({
                             alertTitle: Texts.ERREUR_TITRE.text_fr,
@@ -81,7 +83,6 @@ class UsersFeedbacks extends React.Component {
                 }
             },
             function (error) {
-
                 console.log(error);
                 if (me !== undefined) {
                     me.props.displayAlert({
@@ -104,13 +105,44 @@ class UsersFeedbacks extends React.Component {
         });
     }
 
-    setCursor() {
-        return {cursor: "pointer"};
+    keyWordFilterChange(event) {
+        this.props.setUsersFilterKeywords(event.target.value);
+        this.filterKeyWord(event.target.value);
+    }
+
+    filterKeyWord(value) {
+        let updatedFeedbacks = this.props.initial_users_feedbacks;
+        updatedFeedbacks = updatedFeedbacks.filter(function(item){
+            return ((item.user.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+                (item.user.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
+                (item.user.login.toLowerCase().search(value.toLowerCase()) !== -1) ||
+                (item.email.toLowerCase().search(value.toLowerCase()) !== -1) ||
+                (item.content.toLowerCase().search(value.toLowerCase()) !== -1)
+            );
+        });
+        this.props.setUsersFeedbacks(updatedFeedbacks);
     }
 
     render() {
         return (
-            <div>
+            <Panel>
+                <Panel header={<div><Glyphicon glyph="filter" /> {Texts.FILTRE.text_fr}</div>}>
+                    <Form horizontal>
+                        <FormGroup>
+                            <Col componentClass={ControlLabel} xs={12} sm={12} md={2} lg={2}>
+                                {Texts.MOTS_CLEFS.text_fr}
+                            </Col>
+                            <Col xs={12} sm={12} md={4} lg={4}>
+                                <FormControl
+                                    type="text"
+                                    placeholder={Texts.LOGIN_NOM_EMAIL.text_fr}
+                                    value={this.props.users_filter_keywords}
+                                    onChange={this.keyWordFilterChange.bind(this)}
+                                />
+                            </Col>
+                        </FormGroup>
+                    </Form>
+                </Panel>
                 <Table striped bordered condensed hover>
                     <thead>
                     <tr>
@@ -126,7 +158,7 @@ class UsersFeedbacks extends React.Component {
 
                     {
                         this.props.users_feedbacks.map((item, index) => (
-                            <tr key={item._id} style={this.setCursor()} onClick={this.handleFeedbackClick.bind(this, item)}>
+                            <tr key={item._id} style={{cursor: "pointer"}} onClick={this.handleFeedbackClick.bind(this, item)}>
                                 <td>{item.user.first_name + " " + item.user.last_name}</td>
                                 <td>{item.user.login}</td>
                                 <td>{item.email}</td>
@@ -165,7 +197,7 @@ class UsersFeedbacks extends React.Component {
                         </Modal.Footer>
                     </Modal>
                 }
-            </div>
+            </Panel>
         );
     }
 }
@@ -175,6 +207,8 @@ function mapStateToProps(state) {
         users_feedbacks_is_load: state.global.users_feedbacks_is_load,
 
         users_feedbacks: state.feedbacks.users_feedbacks,
+        initial_users_feedbacks: state.feedbacks.initial_users_feedbacks,
+        users_filter_keywords: state.feedbacks.users_filter_keywords,
         showUserFeedback: state.feedbacks.showUserFeedback,
         currentFeedback: state.feedbacks.currentFeedback
     };
@@ -185,5 +219,7 @@ export default connect(mapStateToProps, {
     setUsersFeedbacksIsLoad,
     setUsersFeedbacks,
     displayFeedback,
-    dismissFeedback
+    dismissFeedback,
+    setInitialUsersFeedbacks,
+    setUsersFilterKeywords
 })(UsersFeedbacks);
