@@ -686,7 +686,7 @@ class Users extends React.Component {
                         <Modal.Title>
                             {
                                 this.props.details_modal_user.login + " - " +
-                                this.props.details_modal_user.fitness_center.name
+                                this.props.details_modal_user.fitness_center !== undefined ? this.props.details_modal_user.fitness_center.name : ""
                             }
                         </Modal.Title>
                     </Modal.Header>
