@@ -38,8 +38,9 @@ class ManagersFeedbacks extends React.Component {
         this.state = {
             feedback_current_response: "",
             feedback_current_state_code: -1,
-            feedback_current_state_id: ""
-        }
+            feedback_current_state_id: "",
+        };
+        this.handleFeedbackStateChange = this.handleFeedbackStateChange.bind(this);
     }
 
     componentWillMount() {
@@ -225,6 +226,10 @@ class ManagersFeedbacks extends React.Component {
         );
     }
 
+    handleFeedbackStateChange(event) {
+        this.setState({feedback_current_state_code: parseInt(event.target.value)});
+    }
+
 
     handleFeedbackDismiss() {
         this.props.dismissFeedback();
@@ -281,7 +286,64 @@ class ManagersFeedbacks extends React.Component {
 
     handleFeedbackResponseSend() {
         if (this.state.feedback_current_response.length > 0) {
+            let params = {};
 
+            params[Fields.TOKEN] = localStorage.getItem("token");
+            params[Fields.FEEDBACK_ID] = this.props.currentFeedback._id;
+            params[Fields.CONTENT] = this.state.feedback_current_response;
+            params[Fields.FEEDBACK_STATE_CODE] = this.state.feedback_current_state_code;
+
+            console.log(params[Fields.FEEDBACK_STATE_CODE]);
+            // console.log(this.props.currentFeedback._id)
+            let me = this;
+
+            let communication = new Communication(HttpMethods.POST, Paths.HOST + Paths.ADD_RESPONSE_FEEDBACK, params);
+            communication.sendRequest(
+                function (response) {
+                    if (response.status === 200) {
+                        if (response.data.code === Status.GENERIC_OK.code) {
+                            if (me !== undefined) {
+                                console.log("Envoi réussi")
+                            }
+
+                        } else {
+
+                            let message = "";
+                            for (let key in Status) {
+                                if (Status[key].code === response.data.code) {
+                                    message = Status[key].message_fr;
+                                    break;
+                                }
+                            }
+
+                            if (me !== undefined) {
+                                me.props.displayAlert({
+                                    alertTitle: Texts.ERREUR_TITRE.text_fr,
+                                    alertText: message
+                                });
+                            }
+                        }
+                    } else {
+                        console.log("hello");
+                        if (me !== undefined) {
+                            me.props.displayAlert({
+                                alertTitle: Texts.ERREUR_TITRE.text_fr,
+                                alertText: Texts.ERR_RESEAU.text_fr
+                            });
+                        }
+                    }
+                },
+                function (error) {
+
+                    console.log(error);
+                    if (me !== undefined) {
+                        me.props.displayAlert({
+                            alertTitle: Texts.ERREUR_TITRE.text_fr,
+                            alertText: Texts.ERR_RESEAU.text_fr
+                        });
+                    }
+                }
+            );
         }
     }
 
@@ -347,32 +409,34 @@ class ManagersFeedbacks extends React.Component {
                                     />
                                 </FormGroup>
                                 <Grid fluid>
+                                    <Col xs={5} md={5} lg={5} xl={5}>
+                                        <span>Modifier la valeur du ticket :</span>
+                                        <select
+                                            className="form-control"
+                                            placeholder={this.props.currentFeedback.feedback_state}
+                                            value={this.state.feedback_current_state_code}
+                                            onChange={this.handleFeedbackStateChange}
+                                        >
+                                            {
+                                                this.props.feedback_states.map((item, index) => (
+                                                    <option
+                                                        key={item._id}
+                                                        value={item.code}
+                                                    >{item.text_fr}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </Col>
                                     <Button
                                         className={"pull-right"}
                                         bsStyle={"primary"}
+                                        style={{marginTop: "18px"}}
                                         onClick={this.handleFeedbackResponseSend.bind(this)}
                                     >
                                         <Glyphicon glyph="send"/> {Texts.REPONDRE.text_fr}
                                     </Button>
                                 </Grid>
                             </div>
-                            {console.log(this.props.feedback_states)}
-                            <Col><h5>Modifier la valeur du ticket :</h5></Col>
-                            <Col>
-                                <select
-                                    value={this.props.currentFeedback.feedback_state}>
-                                    {
-                                        this.props.feedback_states.map((item, index) => (
-                                            <option
-                                                key={item._id}
-                                                value={item.code}
-                                                //onClick={this.handleFeedbackStateSend.bind(this)}
-                                            >{item.text_fr}</option>
-                                        ))
-                                    }
-                                </select>
-                            </Col>
-
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleFeedbackDismiss.bind(this)}><Glyphicon
