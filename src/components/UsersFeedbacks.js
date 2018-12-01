@@ -229,6 +229,7 @@ class UsersFeedbacks extends React.Component {
                                     style={{fontWeight: "bold"}}>{Texts.CONTENU.text_fr + " : "}
                                 </span>
                                 <br/>
+                                <br/>
                                 {this.props.currentFeedback.content}
                             </FormControl.Static>
                         </Modal.Body>
