@@ -19,12 +19,12 @@ class App extends React.Component {
               <Route path={"/auth"} component={Login}/>
               <Route component={EnsureLoggedInContainer}>
                 <Route path={"/"} component={Dashboard}>
-                  <IndexRedirect to="/users" />
-                  <Route path={"users"} component={Users}/>
-                  <Route path={"managers"} component={Managers}/>
-                  <Route path={"feedback"} component={Feedbacks}/>
-                  <Route path={"modules"} component={Modules}/>
-                  <Route path={"administrators"} component={Administrators}/>
+                    <IndexRedirect to="/managers" />
+                    <Route path={"managers"} component={Managers}/>
+                    <Route path={"users"} component={Users}/>
+                    <Route path={"feedback"} component={Feedbacks}/>
+                    <Route path={"modules"} component={Modules}/>
+                    <Route path={"administrators"} component={Administrators}/>
                 </Route>
               </Route>
             </Router>

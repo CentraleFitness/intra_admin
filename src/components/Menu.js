@@ -33,15 +33,15 @@ class Menu extends React.Component {
                 <Panel className={"menu"}>
                     <Nav bsStyle="pills" stacked activeKey={this.state.active_key} onSelect={this.handleSelect.bind(this)}>
 
-                        <LinkContainer to={"/users"}>
-                            <NavItem eventKey={"users"}>
-                                <Glyphicon glyph="phone" />&nbsp;&nbsp;{Texts.UTILISATEURS.text_fr}
-                            </NavItem>
-                        </LinkContainer>
-
                         <LinkContainer to={"/managers"}>
                             <NavItem eventKey={"managers"}>
                                 <Glyphicon glyph="user" />&nbsp;&nbsp;{Texts.GERANT.text_fr + "s"}
+                            </NavItem>
+                        </LinkContainer>
+
+                        <LinkContainer to={"/users"}>
+                            <NavItem eventKey={"users"}>
+                                <Glyphicon glyph="phone" />&nbsp;&nbsp;{Texts.UTILISATEURS.text_fr}
                             </NavItem>
                         </LinkContainer>
 
