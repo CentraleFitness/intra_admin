@@ -92,7 +92,7 @@ class Users extends React.Component {
                         if (me !== undefined) {
                             me.props.setUsers(response.data.users);
                             me.props.setInitialUsers(response.data.users);
-                            me.filterName(me.props.filter_name);
+                            //me.filterName(me.props.filter_name);
                             me.props.setUsersIsLoad();
                         }
 

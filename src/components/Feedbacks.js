@@ -36,15 +36,6 @@ class Feedbacks extends React.Component {
         };
     }
 
-    componentWillMount() {
-        if (this.props.managers_is_load === false) {
-            this.getManagers();
-        }
-        if (this.props.fitness_centers_is_load === false) {
-            this.getFitnessCenters();
-        }
-    }
-
     handleSelect(key) {
         this.setState({
             key: key
