@@ -92,7 +92,8 @@ class Users extends React.Component {
                         if (me !== undefined) {
                             me.props.setUsers(response.data.users);
                             me.props.setInitialUsers(response.data.users);
-                            me.filterName(me.props.filter_name);
+                            console.log(me.props.filter_name);
+                            //me.filterName(me.props.filter_name);
                             me.props.setUsersIsLoad();
                         }
 
@@ -415,11 +416,12 @@ class Users extends React.Component {
     }
 
     getNameBool(value, item) {
-        return (value === undefined || (
+        return (
             (item.first_name !== undefined && item.first_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
             (item.last_name !== undefined && item.last_name.toLowerCase().search(value.toLowerCase()) !== -1) ||
             (item.login !== undefined && item.login.toLowerCase().search(value.toLowerCase()) !== -1) ||
-            (item.email_address !== undefined && item.email_address.toLowerCase().search(value.toLowerCase()) !== -1)));
+            (item.email_address !== undefined && item.email_address.toLowerCase().search(value.toLowerCase()) !== -1)
+        );
     }
 
     getFitnessCenterBool(value_select, item) {
