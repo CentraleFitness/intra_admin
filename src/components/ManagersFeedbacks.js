@@ -108,6 +108,7 @@ class ManagersFeedbacks extends React.Component {
                         }
                         me.filterStatus(me.props.manager_filter_status);
                         me.setState({
+                            initial_feedback_current_state_code: me.state.feedback_current_state_code,
                             feedback_current_response: ""
                         });
                     } else {
