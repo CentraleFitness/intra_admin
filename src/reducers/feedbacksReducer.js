@@ -75,6 +75,7 @@ export default (state = initialState, action) => {
             });
 
             tmp_feedback_update[index].feedback_state = action.payload.feedback_state;
+            tmp_feedback_update[index].feedback_state_name = action.payload.feedback_state_name;
             tmp_feedback_update[index].update_date = action.payload.date;
 
             return {
@@ -97,6 +98,7 @@ export default (state = initialState, action) => {
             });
 
             tmp_feedback_update[index].feedback_state = action.payload.feedback_state;
+            tmp_feedback_update[index].feedback_state_name = action.payload.feedback_state_name;
             tmp_feedback_update[index].update_date = action.payload.date;
 
             return {

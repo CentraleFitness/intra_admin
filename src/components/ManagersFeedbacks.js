@@ -92,6 +92,7 @@ class ManagersFeedbacks extends React.Component {
                             me.props.addFeedbackResponse({
                                 _id: me.props.currentFeedback._id,
                                 feedback_state: me.state.feedback_current_state_code,
+                                feedback_state_name: me.state.feedback_current_state_name,
                                 is_admin: true,
                                 content: me.state.feedback_current_response,
                                 date: now.getTime(),
@@ -101,6 +102,7 @@ class ManagersFeedbacks extends React.Component {
                             me.props.setFeedbackState({
                                 _id: me.props.currentFeedback._id,
                                 feedback_state: me.state.feedback_current_state_code,
+                                feedback_state_name: me.state.feedback_current_state_name,
                                 date: now.getTime()
                             });
                         }
